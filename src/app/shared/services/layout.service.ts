@@ -51,7 +51,7 @@ export class LayoutService {
         dir: 'ltr', // ltr, rtl
         useBreadcrumb: true,
         topbarFixed: false,
-        footerFixed: false,
+        footerFixed: true,
         topbarColor: 'white', // http://demos.ui-lib.com/matx-doc/#matx-colors
         footerColor: 'slate', // http://demos.ui-lib.com/matx-doc/#matx-colors
         matTheme: 'matx-navy', // matx-navy, matx-navy-dark
