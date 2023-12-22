@@ -38,7 +38,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'forms',
         loadChildren: () => import('./views/forms/forms.module').then(m => m.AppFormsModule),
-        data: { title: 'Forms', breadcrumb: 'FORMS'}
+        data: { title: '', breadcrumb: ''}
       },
       
       {

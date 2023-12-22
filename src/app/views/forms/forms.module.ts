@@ -23,6 +23,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 
 import { FormsRoutes } from './forms.routing';
 import { WizardComponent } from './wizard/wizard.component';
+import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastecimento.component';
 
 @NgModule({
   imports: [
@@ -45,6 +46,6 @@ import { WizardComponent } from './wizard/wizard.component';
     FileUploadModule,
     RouterModule.forChild(FormsRoutes),
   ],
-  declarations: [RichTextEditorComponent, FileUploadComponent, WizardComponent, BasicFormComponent],
+  declarations: [RichTextEditorComponent, FileUploadComponent, WizardComponent, BasicFormComponent, PostoAbastecimentoComponent],
 })
 export class AppFormsModule {}

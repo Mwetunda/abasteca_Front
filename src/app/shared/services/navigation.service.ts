@@ -39,62 +39,42 @@ export class NavigationService {
       name: 'Contas',
       state: 'forms/basic',
       type: 'link',
-      icon: 'description',
+      icon: 'account_circle',
     },
     {
       name: 'Postos Abastecimento',
-      state: 'forms/editor',
+      state: 'forms/posto',
       type: 'link',
-      icon: 'subject',
+      icon: 'local_gas_station',
     },
     {
       name: 'Operadores',
       state: 'forms/upload',
       type: 'link',
-      icon: 'upload',
+      icon: 'supervisor_account',
     },
     {
       name: 'Configurações',
       type: 'dropDown',
       tooltip: 'Others',
-      icon: 'blur_on',
+      icon: 'settings',
       sub: [
-        { name: 'Operadoras', state: 'others/gallery' },
-        { name: 'Combustíveis', state: 'others/pricing' },
-        { name: 'Locais', state: 'others/users' },
-        { name: 'BLANK', state: 'others/blank' }
+        { 
+          name: 'Operadoras', 
+          state: 'others/gallery' 
+        },
+        {
+           name: 'Combustíveis', 
+           state: 'others/pricing' 
+        },
+        { name: 'Locais', 
+          state: 'others/users' 
+        },
       ]
     },
 
-    // {
-    //   name: 'Configurações',
-    //   type: 'dropDown',
-    //   tooltip: 'Pages',
-    //   icon: 'view_carousel',
-    //   sub: [
-    //     { name: 'SIGNUP', state: 'sessions/signup' },
-    //     { name: 'SIGNIN', state: 'sessions/signin' },
-    //     { name: 'NOTFOUND', state: 'sessions/404' },
-    //   ]
-    // },
-    
-    // {
-    //   name: 'Pro',
-    //   type: 'extLink',
-    //   icon: 'upgrade',
-    //   state: 'http://matx-angular.ui-lib.com/'
-    // },
-    // {
-    //   name: 'DOC',
-    //   type: 'extLink',
-    //   tooltip: 'Documentation',
-    //   icon: 'library_books',
-    //   state: 'http://demos.ui-lib.com/matx-doc/'
-    // }
   ];
 
-  // Icon menu TITLE at the very top of navigation.
-  // This title will appear if any icon type item is present in menu.
   iconTypeMenuTitle = 'Frequently Accessed';
   // sets iconMenu as default;
   menuItems = new BehaviorSubject<IMenuItem[]>(this.iconMenu);
