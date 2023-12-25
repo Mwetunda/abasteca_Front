@@ -1,0 +1,35 @@
+.txt-red {
+  color: red;
+}
+
+.txt-bold {
+  font-weight: bold;
+}
+
+.ellipsis {
+  text-overflow: ellipsis!important;
+}
+
+@for $i from 1 through 5 {
+  .clamp-#{$i} {
+    overflow: hidden;
+    display: block;
+    line-height: 1.1;
+    -webkit-line-clamp: $i;
+    line-clamp: $i;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+}
+
+.texto-ellipsis {
+  overflow: hidden!important;
+  text-overflow: ellipsis!important;
+  white-space: nowrap!important;
+}
+
+.break-space {
+  white-space: break-spaces!important; line-height:1em!important;
+}

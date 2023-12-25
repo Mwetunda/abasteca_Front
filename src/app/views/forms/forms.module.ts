@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
@@ -45,7 +47,15 @@ import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastec
     QuillModule.forRoot(),
     FileUploadModule,
     RouterModule.forChild(FormsRoutes),
+    NgxDatatableModule,
+    MatMenuModule,
   ],
-  declarations: [RichTextEditorComponent, FileUploadComponent, WizardComponent, BasicFormComponent, PostoAbastecimentoComponent],
+  declarations: [
+    RichTextEditorComponent, 
+    FileUploadComponent, 
+    WizardComponent, 
+    BasicFormComponent, 
+    PostoAbastecimentoComponent
+  ],
 })
 export class AppFormsModule {}

@@ -1,0 +1,104 @@
+.grid {
+  display: grid;
+}
+
+
+@for $i from 1 through 30 {
+  .flex-grow-#{$i} {
+    flex-grow: $i;
+  }
+}
+
+@for $i from 1 through 12 {
+  .cols-lg-#{$i} {
+    grid-template-columns: repeat($i, minmax(0, 1fr));
+  }
+}
+
+@for $i from 1 through 12 {
+  .grid-cols-lg-#{$i} {
+    grid-template-columns: repeat($i, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 1920px) and (max-width: 5000px){
+  @for $i from 1 through 12 {
+    .col-xl-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+
+    .gap-xl-#{$i} {
+      gap: #{$i}px;
+    }
+  }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1919px){
+  @for $i from 1 through 12 {
+    .col-lg-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .gap-lg-#{$i} {
+      gap: #{$i}px;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1279px){
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .gap-md-#{$i} {
+      gap: #{$i}px;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1279px){
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .gap-md-#{$i} {
+      gap: #{$i}px;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px){
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .gap-sm-#{$i} {
+      gap: #{$i}px;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 599px){
+  @for $i from 1 through 12 {
+    .col-xs-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .gap-xs-#{$i} {
+      gap: #{$i}px;
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 320px){
+  @for $i from 1 through 12 {
+    .col-2xs-#{$i} {
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+    .gap-2xs-#{$i} {gap: #{$i}px;}
+  }
+}
+
+@for $i from 1 through 12 {
+  .gap-#{$i} {
+    gap: #{$i}px;
+  }
+}

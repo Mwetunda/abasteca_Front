@@ -13,6 +13,11 @@
 // @import '~flag-icon-css/css/flag-icon.min.css';
 @import '~flag-icons/css/flag-icons.min.css';
 
+// // Data Table
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
 // // Rich Text Editor
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
@@ -31,7 +36,6 @@
 
 // // Highlightjs theme
 @import '~highlight.js/styles/github.css';
-
 
 // Main Variables File
 @import "scss/variables";
@@ -56,5 +60,12 @@
 
 // Open _views.scss and remove unnecessary view related files
 @import "scss/views/views";
+
+@import "scss/abasteca/tables";
+@import "scss/abasteca/base";
+@import "scss/abasteca/filtros";
+@import "scss/abasteca/tipografia";
+@import "scss/abasteca/datepicker";
+@import "scss/abasteca/grid";
 
 
