@@ -33,7 +33,7 @@ export class PostoAbastecimentoComponent implements OnInit {
   initForms(): any {
 
     return this.formBuilder.group({
-      idEstado: [0],
+      idEstado: [],
       codigo: [''],
       nome: [''],
       NIF: [''],

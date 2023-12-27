@@ -1,249 +1,304 @@
 <div *ngIf="progressBar">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<mat-card class="p-0">
-    <mat-card-title>
-        <div class="flex-x-btw flex-y-center pl-1 ">
-            <p class="pr-1 pr-1 mb-0 txt-primary">
-                <span (click)="mostrarFiltros = !mostrarFiltros"
-                    style="display: flex; align-items: center; cursor: pointer">
-                    <span>Postos de Abastecimento</span>
-                    <mat-icon [innerText]="mostrarFiltros ? 'expand_more' : 'expand_less'"></mat-icon>
-                </span>
-            </p>
-        </div>
-    </mat-card-title>
-
-    <mat-card-content class="mb-16 mt-0" *ngIf="mostrarFiltros">
-        <form [formGroup]="filtroForm" (submit)="filtrar()">
-            <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
-                <!-- <div *ngIf="entidade?.idOpcTipos !== OpcaoNaoUsado" fxFlex="20" fxFlex.xl="10" fxFlex.lg="10"
-                    fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="30" class="pr-8">
+<div>
+    <mat-card class="p-0">
+        <mat-card-title>
+            <div class="flex-x-btw flex-y-center pl-1 ">
+                <p class="pr-1 pr-1 mb-0 txt-primary">
+                    <span (click)="mostrarFiltros = !mostrarFiltros"
+                        style="display: flex; align-items: center; cursor: pointer">
+                        <span>Postos de Abastecimento</span>
+                        <mat-icon [innerText]="mostrarFiltros ? 'expand_more' : 'expand_less'"></mat-icon>
+                    </span>
+                </p>
+            </div>
+        </mat-card-title>
+    
+        <mat-card-content class="mb-16 mt-0" *ngIf="mostrarFiltros">
+            <form [formGroup]="filtroForm" (submit)="filtrar()">
+                <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
+                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Designação</mat-label>
+                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                        class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Operadora</mat-label>
+                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                                    {{estado.estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Endereço</mat-label>
+                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                        class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Província</mat-label>
+                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                                    {{estado.estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                        class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Município</mat-label>
+                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                                    {{estado.estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                        class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Distrito</mat-label>
+                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                                    {{estado.estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Distância(Km)</mat-label>
+                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                        class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Distrito</mat-label>
+                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                                    {{estado.estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Distância(Km)</mat-label>
+                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                        </mat-form-field>
+                    </div><div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                    class="pl-1 pr-1">
                     <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Tipos</mat-label>
-                        <mat-select formControlName="IdTipo" matNativeControl multiple
-                            (selectionChange)="adicionarTipos($event.value)">
+                        <mat-label>Distrito</mat-label>
+                        <mat-select formControlName="idEstado" matNativeControl multiple>
                             <mat-option [value]="0">Seleccione</mat-option>
-                            <mat-option *ngFor="let tipo of clientesTipos$ | async" [value]="tipo.idTipo">{{
-                                tipo.tipo
-                                }}</mat-option>
+                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                                {{estado.estado}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                </div> -->
-
+                </div>
+    
                 <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
                     <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Código</mat-label>
+                        <mat-label>Distância(Km)</mat-label>
                         <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
                     </mat-form-field>
                 </div>
-
-                <div fxFlex="15" fxFlex.xl="30" fxFlex.lg="30" fxFlex.gt-xs="50" fxFlex.xs="30" class="pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Nome</mat-label>
-                        <input maxlength="127" matInput name="Nome" formControlName="nome"
-                            placeholder="{{ labelNomeCliente }}" />
-                    </mat-form-field>
-                </div>
-
-                <div *ngIf="entidade?.idOpcNIF !== OpcaoNaoUsado" fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5"
-                    fxFlex.gt-xs="50" fxFlex.xs="20" class="pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>NIF</mat-label>
-                        <input matInput name="NIF" class="uppercase" formControlName="NIF" placeholder="NIF" />
-                    </mat-form-field>
-                </div>
-
-                <div *ngIf="entidade?.idOpcEmail !== OpcaoNaoUsado" fxFlex="15" fxFlex.xl="25" fxFlex.lg="25"
-                    fxFlex.gt-xs="50" fxFlex.xs="25" class="pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>E-mail</mat-label>
-                        <input maxlength="127" matInput name="Email" formControlName="email" placeholder="E-mail"
-                            value="" />
-                    </mat-form-field>
-                </div>
-
-                <!-- Data com Ranger -->
-                <!-- <div id="data-recognize-contas" formGroupName="form" fxFlex="10" fxFlex.xl="13" fxFlex.lg="17"
-                    fxFlex.md="20" fxFlex.xs="25" class="pr-1 cursor-pointer">
-                    <mat-form-field class="full-width date-icon" appearance="outline"
-                        style="background-image: url('assets/images/icons/calendar.svg');">
-                        <mat-label>Data (desde, até) </mat-label>
-                        <input #inData1 id="in-data-contas-1" matInput ngxDaterangepickerMd [opens]="'right'"
-                            [ranges]="ranges" [readonly]="false" startKey="inicio" endKey="fim" autocomplete="off"
-                            [showDropdowns]="true" [alwaysShowCalendars]="true" [linkedCalendars]="true"
-                            [showCancel]="true"
-                            [locale]="{cancelLabel: 'Cancelar', applyLabel: 'Aplicar',  format: 'DD/MM/YYYY'}"
-                            formControlName="data1" name="data1" (keypress)="validarCaracter($event)"
-                            (input)="validarData($event, inData1.id, inData1.name)"
-                            (change)="getDataInterval($event, inData1.id)" class="cursor-pointer"
-                            class="cursor-pointer" />
-                    </mat-form-field>
-                </div> -->
-
-                <div fxFlex="100" fxFlex.xl="15" fxFlex.lg="15" fxFlex.gt-xs="20" fxFlex.xs="30" class="pr-1">
-                    <div class="flex flex-y-center pt-03 h-100">
-
-                        <button mat-raised-button color="primary" type="submit" class="btn-filter">
-                            <mat-icon>search</mat-icon>
-                        </button>
-
-                        <button class="ml-05 btn-filter" mat-raised-button color="primary" type="reset"
-                            (click)="limparFiltro()">
-                            <mat-icon>cancel</mat-icon>
-                        </button>
+    
+                    <!-- Data com Ranger -->
+                    <!-- <div id="data-recognize-contas" formGroupName="form" fxFlex="10" fxFlex.xl="13" fxFlex.lg="17"
+                        fxFlex.md="20" fxFlex.xs="25" class="pr-1 cursor-pointer">
+                        <mat-form-field class="full-width date-icon" appearance="outline"
+                            style="background-image: url('assets/images/icons/calendar.svg');">
+                            <mat-label>Data (desde, até) </mat-label>
+                            <input #inData1 id="in-data-contas-1" matInput ngxDaterangepickerMd [opens]="'right'"
+                                [ranges]="ranges" [readonly]="false" startKey="inicio" endKey="fim" autocomplete="off"
+                                [showDropdowns]="true" [alwaysShowCalendars]="true" [linkedCalendars]="true"
+                                [showCancel]="true"
+                                [locale]="{cancelLabel: 'Cancelar', applyLabel: 'Aplicar',  format: 'DD/MM/YYYY'}"
+                                formControlName="data1" name="data1" (keypress)="validarCaracter($event)"
+                                (input)="validarData($event, inData1.id, inData1.name)"
+                                (change)="getDataInterval($event, inData1.id)" class="cursor-pointer"
+                                class="cursor-pointer" />
+                        </mat-form-field>
+                    </div> -->
+    
+                    <div fxFlex="100" fxFlex.xl="15" fxFlex.lg="15" fxFlex.gt-xs="20" fxFlex.xs="30" class="pl-1 pr-1">
+                        <div class="flex flex-y-center pt-03 h-100">
+    
+                            <button mat-raised-button color="primary" type="submit" class="btn-filter">
+                                <mat-icon>search</mat-icon>
+                            </button>
+    
+                            <button class="ml-05 btn-filter" mat-raised-button color="primary" type="reset"
+                                (click)="limparFiltro()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </mat-card-content>
-</mat-card>
-<!-- / FIM DA SECÇÃO DE FILTROS DE PESQUISA DE CLIENTES -->
-
-<div class="m-0">
-    <mat-card class="p-0">
-        <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
-            <div class="p-0">
-                <button (click)="exportarParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
-                    matTooltipClass="green-900" class="img-button">
-                    <img src="assets/images/svg-icons/excel-icon.svg" style="
-                      border-radius: 0 !important;
-                      width: 20px !important;
-                      height: 20px !important;
-                    " alt="" />
-                </button>
-            </div>
-            <div class="pt-0 pr-05 flex flex-y-center w-80 div-estilo">
-
-                <button class="btn-filter" type="button" mat-raised-button color="basic"
-                    style="padding: 0 10px !important">
-                    <mat-icon> place</mat-icon>
-                    Ver no Mapa
-                </button>
-
-            </div>
-            <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
-
-                <button class="btn-filter" mat-raised-button color="primary"
-                    [routerLink]="['/artigos/inscricoes','C',0,0]" style="padding: 0 10px !important">
-                    <mat-icon>add_circle</mat-icon>
-                    Inserir Posto
-                </button>
-            </div>
-        </div>
-        <mat-divider></mat-divider>
-
-        <!--LISTAGEM DE CLIENTES -->
-
-        <div id="tabela-clientes">
-            <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 280px)" [rows]="postos"
-                [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45" [rowHeight]="35" [scrollbarV]="true"
-                [scrollbarH]="true" [selected]="selected" [selectAllRowsOnPage]="false" (select)="aoSelecionar($event)"
-                [selectionType]="'checkbox'">
-                <ngx-datatable-column [width]="30" [headerCheckboxable]="true" [checkboxable]="true">
-                    <ng-template let-row="row" ngx-datatable-cell-template> </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Designação" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <span [ngClass]="{ desabilitar: !CONSUCLIEN}"
-                            routerLink="/clientes/{{ operacaoConsultar }}/{{ row?.idCliente }}/{{entidade?.idEntidade}}"
-                            class="cursor-pointer">
-                            {{ row?.designacao }}
-                        </span>
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Operadora" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.operadora }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Endereço" [flexGrow]="4">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <span>
-                            {{ row?.endereco?.descricao }}
-                        </span>
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Distrito" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.endereco?.distrito  }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Municíopio" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.endereco?.municipio }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Província" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.endereco?.provincia  }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Latitude" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.endereco?.latitude  }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Longitude" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.endereco?.longitude  }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Distância" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.endereco?.distancia  }}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Data da última actualização" [flexGrow]="2">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="" [width]="60" [frozenRight]="true">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <div class="bg-white w-100">
-                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
-                                style="transform: translateY(1px)">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #menu="matMenu">
-                                <button mat-menu-item
-                                    [routerLink]="['/artigos/inscricoes','D',IdClassificacao,row.idRealizacaoInscricao]">
-                                    <span>Consultar </span>
-                                </button>
-
-                                <div *ngIf="row.idEstadoInscricao !== 5">
-                                    <button mat-menu-item
-                                        [routerLink]="['/artigos/inscricoes','E',IdClassificacao,row.idRealizacaoInscricao]">
-                                        <span>Editar</span>
-                                    </button>
-                                </div>
-
-                                <button mat-menu-item (click)="removerPosto(row)">
-                                    <span>Remover</span>
-                                </button>
-                            </mat-menu>
-                        </div>
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable>
-        </div>
+            </form>
+        </mat-card-content>
     </mat-card>
+    <!-- / FIM DA SECÇÃO DE FILTROS DE PESQUISA DE CLIENTES -->
+    
+    <div class="p-0">
+        <mat-card class="p-0">
+            <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
+                <div class="p-0">
+                    <button (click)="exportarParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
+                        matTooltipClass="green-900" class="img-button">
+                        <img src="assets/images/svg-icons/excel-icon.svg" style="
+                          border-radius: 0 !important;
+                          width: 20px !important;
+                          height: 20px !important;
+                        " alt="" />
+                    </button>
+                </div>
+                <div class="pt-0 pr-05 flex flex-y-center w-80 div-estilo">
+    
+                    <button class="btn-filter" type="button" mat-raised-button color="basic"
+                        style="padding: 0 10px !important">
+                        <mat-icon> place</mat-icon>
+                        Ver no Mapa
+                    </button>
+    
+                </div>
+                <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
+    
+                    <button class="btn-filter" mat-raised-button color="primary"
+                        [routerLink]="['/artigos/inscricoes','C',0,0]" style="padding: 0 10px !important">
+                        <mat-icon>add_circle</mat-icon>
+                        Inserir Posto
+                    </button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+    
+            <div id="tabela-postos">
+                <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 365px)" [rows]="postos"
+                    [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45" [rowHeight]="35" [scrollbarV]="true"
+                    [scrollbarH]="true" [selected]="selected" [selectAllRowsOnPage]="false" (select)="aoSelecionar($event)"
+                    [selectionType]="'checkbox'">
+                    <ngx-datatable-column [width]="30" [headerCheckboxable]="true" [checkboxable]="true">
+                        <ng-template let-row="row" ngx-datatable-cell-template> </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Designação" [width]="300">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.designacao }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Operadora" [width]="130">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.operadora }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Endereço" [width]="400">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span>
+                                {{ row?.endereco?.descricao }}
+                            </span>
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Província" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.endereco?.provincia }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Municíopio" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.endereco?.municipio }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Distrito" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.endereco?.distrito }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Latitude" [width]="190">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.endereco?.latitude }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Longitude" [width]="190">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.endereco?.longitude }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Distância(km)" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.endereco?.distancia }}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Data da última actualização" [width]="210">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="" [width]="60" [frozenRight]="true">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="bg-white w-100">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
+                                    style="transform: translateY(1px)">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item
+                                        [routerLink]="['/artigos/inscricoes','D',IdClassificacao,row.idRealizacaoInscricao]">
+                                        <span>Consultar </span>
+                                    </button>
+    
+                                    <div *ngIf="row.idEstadoInscricao !== 5">
+                                        <button mat-menu-item
+                                            [routerLink]="['/artigos/inscricoes','E',IdClassificacao,row.idRealizacaoInscricao]">
+                                            <span>Editar</span>
+                                        </button>
+                                    </div>
+    
+                                    <button mat-menu-item (click)="removerPosto(row)">
+                                        <span>Remover</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </mat-card>
+    </div>
 </div>

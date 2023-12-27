@@ -18,7 +18,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { FileUploadModule } from 'ng2-file-upload';
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -49,6 +50,8 @@ import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastec
     RouterModule.forChild(FormsRoutes),
     NgxDatatableModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   declarations: [
     RichTextEditorComponent, 

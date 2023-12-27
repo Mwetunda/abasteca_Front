@@ -111,3 +111,11 @@
 .disableDiv {
     pointer-events: none;
 }
+
+.fixed {
+    position:fixed;
+}
+
+.relative {
+    position:sticky;
+}
