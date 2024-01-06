@@ -14,16 +14,20 @@ const httpOptions = {
 @Injectable({
     providedIn: "root",
 })
-export class PostoAbastecimentoService {
+export class CombustivelService {
     baseUrl: string;
 
     constructor(private http: HttpClient) {
         this.baseUrl = `${environment.apiURL}`;
     }
 
-    getPostosAbastecimento(modelo: any): Observable<any> {
+    getCombustiveis(): Observable<any> {
         return this.http
-            .post(this.baseUrl + "postoAbastecimento/lista/", modelo, httpOptions)
-            .pipe();
+            .get(this.baseUrl + "combustivel/lista/", httpOptions).pipe();
+    }
+
+    getCombustivel(idCombustivel: number): Observable<any> {
+        return this.http
+            .get(this.baseUrl + "combustivel/" + idCombustivel, httpOptions).pipe();
     }
 }

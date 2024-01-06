@@ -37,13 +37,14 @@ export class NavigationService {
     },
     {
       name: 'Contas',
-      state: 'forms/basic',
+      state: 'forms/contas',
+      //state: 'forms/basic',
       type: 'link',
       icon: 'account_circle',
     },
     {
       name: 'Postos Abastecimento',
-      state: 'forms/posto',
+      state: 'forms/postos',
       type: 'link',
       icon: 'local_gas_station',
     },
@@ -59,16 +60,20 @@ export class NavigationService {
       tooltip: 'Others',
       icon: 'settings',
       sub: [
-        { 
-          name: 'Operadoras', 
-          state: 'others/gallery' 
+        {
+          name: 'Operadoras',
+          state: 'forms/configuracoes/operadoras'
+          //state: 'others/gallery' 
         },
         {
-           name: 'Combustíveis', 
-           state: 'others/pricing' 
+          name: 'Combustíveis',
+          state: 'forms/configuracoes/combustiveis'
+          //state: 'others/pricing' 
         },
-        { name: 'Locais', 
-          state: 'others/users' 
+        {
+          name: 'Locais',
+          state: 'forms/configuracoes/locais'
+          //state: 'others/users' 
         },
       ]
     },

@@ -1,0 +1,410 @@
+<div *ngIf="progressBar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="m-0">
+    <mat-tab-group>
+        <mat-tab label="Províncias">
+            <mat-card class="p-0">
+                <mat-card-title>
+                    <div class="flex-x-btw flex-y-center pl-1 ">
+                        <p class="pr-1 pr-1 mb-0 txt-primary">
+                            <span>Províncias</span>
+                        </p>
+                    </div>
+                </mat-card-title>
+            </mat-card>
+
+            <div class="p-0">
+                <mat-card class="p-0">
+                    <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
+                        <div class="p-0">
+                            <button (click)="exportarProvinciasParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
+                                matTooltipClass="green-900" class="img-button">
+                                <img src="assets/images/svg-icons/excel-icon.svg" style="
+                                  border-radius: 0 !important;
+                                  width: 20px !important;
+                                  height: 20px !important;
+                                " alt="" />
+                            </button>
+                        </div>
+                        <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
+
+                            <button class="btn-filter" mat-raised-button color="primary" [routerLink]="['','C',0,0]"
+                                style="padding: 0 10px !important">
+                                <mat-icon>add_circle</mat-icon>
+                                Inserir Província
+                            </button>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div id="tabela-postos">
+                        <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 280px)"
+                            [rows]="provincias" [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45"
+                            [rowHeight]="35" [scrollbarV]="true" [scrollbarH]="true" [selected]="selectedProvincias"
+                            [selectAllRowsOnPage]="false" (select)="aoSelecionarProvincia($event)" [selectionType]="'checkbox'">
+                            <ngx-datatable-column [width]="1" [headerCheckboxable]="true" [checkboxable]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template> </ng-template>
+                            </ngx-datatable-column>
+
+                            <ngx-datatable-column name="Designação" [width]="300">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.designacao }}
+                                </ng-template>
+                            </ngx-datatable-column>
+
+                            <ngx-datatable-column name="Data da última actualização" [width]="210">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.dataActualizacao | date: 'dd/MM/yyyy HH:mm'}}
+                                </ng-template>
+                            </ngx-datatable-column>
+
+                            <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
+                                </ng-template>
+                            </ngx-datatable-column>
+
+                            <ngx-datatable-column name="" [width]="50" [frozenRight]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <div class="bg-white w-50">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
+                                            style="transform: translateY(1px)">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <button mat-menu-item
+                                                [routerLink]="['','D',IdClassificacao,row.idRealizacaoInscricao]">
+                                                <span>Consultar </span>
+                                            </button>
+
+                                            <div *ngIf="row.idEstadoInscricao !== 5">
+                                                <button mat-menu-item
+                                                    [routerLink]="['','E',IdClassificacao,row.idRealizacaoInscricao]">
+                                                    <span>Editar</span>
+                                                </button>
+                                            </div>
+
+                                            <button mat-menu-item (click)="removerProvincia(row)">
+                                                <span>Remover</span>
+                                            </button>
+                                        </mat-menu>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Municípios">
+            <mat-card class="p-0">
+                <mat-card-title>
+                    <div class="flex-x-btw flex-y-center pl-1 ">
+                        <p class="pr-1 pr-1 mb-0 txt-primary">
+                            <span (click)="mostrarFiltros = !mostrarFiltros"
+                                style="display: flex; align-items: center; cursor: pointer">
+                                <span>Municípios</span>
+                                <mat-icon [innerText]="mostrarFiltros ? 'expand_more' : 'expand_less'"></mat-icon>
+                            </span>
+                        </p>
+                    </div>
+                </mat-card-title>
+            
+                <mat-card-content class="mb-16 mt-0" *ngIf="mostrarFiltros">
+                    <form [formGroup]="filtroMunicipiosForm" (submit)="filtrar()">
+                        <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
+            
+                            <div fxFlex="15" fxFlex.xl="15" fxFlex.lg="25" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Designação</mat-label>
+                                    <input matInput name="Designacao" formControlName="designacao1" placeholder="Designação" />
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="14" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Província</mat-label>
+                                    <mat-select formControlName="idProvincia1" matNativeControl multiple>
+                                        <mat-option [value]="0">Seleccione</mat-option>
+                                        <mat-option *ngFor="let item of provincias" [value]="item.idProvincia">
+                                            {{item.designacao}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+            
+                            <div fxFlex="100" fxFlex.xl="15" fxFlex.lg="15" fxFlex.gt-xs="20" fxFlex.xs="30" class="pl-1 pr-1">
+                                <div class="flex flex-y-center pt-03 h-100">
+            
+                                    <button mat-raised-button color="primary" type="submit" class="btn-filter">
+                                        <mat-icon>search</mat-icon>
+                                    </button>
+            
+                                    <button class="ml-05 btn-filter" mat-raised-button color="primary" type="reset"
+                                        (click)="limparFiltro()">
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+            
+            <div class="p-0">
+                <mat-card class="p-0">
+                    <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
+                        <div class="p-0">
+                            <button (click)="exportarMunicipiossParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
+                                matTooltipClass="green-900" class="img-button">
+                                <img src="assets/images/svg-icons/excel-icon.svg" style="
+                                  border-radius: 0 !important;
+                                  width: 20px !important;
+                                  height: 20px !important;
+                                " alt="" />
+                            </button>
+                        </div>
+                        <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
+            
+                            <button class="btn-filter" mat-raised-button color="primary"
+                                [routerLink]="['','C',0,0]" style="padding: 0 10px !important">
+                                <mat-icon>add_circle</mat-icon>
+                                Inserir Município
+                            </button>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+            
+                    <div id="tabela-postos">
+                        <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 365px)" [rows]="municipios"
+                            [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45" [rowHeight]="35" [scrollbarV]="true"
+                            [scrollbarH]="true" [selected]="selectedMunicipios" [selectAllRowsOnPage]="false" (select)="aoSelecionarMunicipio($event)"
+                            [selectionType]="'checkbox'">
+                            <ngx-datatable-column [width]="30" [headerCheckboxable]="true" [checkboxable]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template> </ng-template>
+                            </ngx-datatable-column>
+            
+                            <ngx-datatable-column name="Designação" [width]="300">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.designacao }}
+                                </ng-template>
+                            </ngx-datatable-column>
+            
+                            <ngx-datatable-column name="Província" [flexGrow]="2">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.provincia }}
+                                </ng-template>
+                            </ngx-datatable-column>
+        
+                            <ngx-datatable-column name="Data da última actualização" [width]="210">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
+                                </ng-template>
+                            </ngx-datatable-column>
+        
+                            <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
+                                </ng-template>
+                            </ngx-datatable-column>
+            
+                            <ngx-datatable-column name="" [width]="50" [frozenRight]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <div class="bg-white w-50">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
+                                            style="transform: translateY(1px)">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <button mat-menu-item
+                                                [routerLink]="['','D',IdClassificacao,row.idRealizacaoInscricao]">
+                                                <span>Consultar </span>
+                                            </button>
+            
+                                            <div *ngIf="row.idEstadoInscricao !== 5">
+                                                <button mat-menu-item
+                                                    [routerLink]="['','E',IdClassificacao,row.idRealizacaoInscricao]">
+                                                    <span>Editar</span>
+                                                </button>
+                                            </div>
+            
+                                            <button mat-menu-item (click)="removerPosto(row)">
+                                                <span>Remover</span>
+                                            </button>
+                                        </mat-menu>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Distritos">
+            <mat-card class="p-0">
+                <mat-card-title>
+                    <div class="flex-x-btw flex-y-center pl-1 ">
+                        <p class="pr-1 pr-1 mb-0 txt-primary">
+                            <span (click)="mostrarFiltros = !mostrarFiltros"
+                                style="display: flex; align-items: center; cursor: pointer">
+                                <span>Distritos</span>
+                                <mat-icon [innerText]="mostrarFiltros ? 'expand_more' : 'expand_less'"></mat-icon>
+                            </span>
+                        </p>
+                    </div>
+                </mat-card-title>
+            
+                <mat-card-content class="mb-16 mt-0" *ngIf="mostrarFiltros">
+                    <form [formGroup]="filtroMunicipiosForm" (submit)="filtrar()">
+                        <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
+            
+                            <div fxFlex="15" fxFlex.xl="15" fxFlex.lg="25" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Designação</mat-label>
+                                    <input matInput name="Designacao" formControlName="designacao" placeholder="Designação" />
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="14" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Província</mat-label>
+                                    <mat-select formControlName="idProvincia" matNativeControl multiple>
+                                        <mat-option [value]="0">Seleccione</mat-option>
+                                        <mat-option *ngFor="let item of provincias" [value]="item.idProvincia">
+                                            {{item.designacao}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+            
+                            <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Município</mat-label>
+                                    <mat-select formControlName="idMunicipio" matNativeControl multiple>
+                                        <mat-option [value]="0">Seleccione</mat-option>
+                                        <mat-option *ngFor="let item of municipios" [value]="item.idMunicipio">
+                                            {{item.designacao}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+            
+                            <div fxFlex="100" fxFlex.xl="15" fxFlex.lg="15" fxFlex.gt-xs="20" fxFlex.xs="30" class="pl-1 pr-1">
+                                <div class="flex flex-y-center pt-03 h-100">
+            
+                                    <button mat-raised-button color="primary" type="submit" class="btn-filter">
+                                        <mat-icon>search</mat-icon>
+                                    </button>
+            
+                                    <button class="ml-05 btn-filter" mat-raised-button color="primary" type="reset"
+                                        (click)="limparFiltro()">
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+            
+            <div class="p-0">
+                <mat-card class="p-0">
+                    <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
+                        <div class="p-0">
+                            <button (click)="exportarDistritosParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
+                                matTooltipClass="green-900" class="img-button">
+                                <img src="assets/images/svg-icons/excel-icon.svg" style="
+                                  border-radius: 0 !important;
+                                  width: 20px !important;
+                                  height: 20px !important;
+                                " alt="" />
+                            </button>
+                        </div>
+                    
+                        <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
+            
+                            <button class="btn-filter" mat-raised-button color="primary"
+                                [routerLink]="['','C',0,0]" style="padding: 0 10px !important">
+                                <mat-icon>add_circle</mat-icon>
+                                Inserir Distrito
+                            </button>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+            
+                    <div id="tabela-postos">
+                        <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 365px)" [rows]="distritos"
+                            [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45" [rowHeight]="35" [scrollbarV]="true"
+                            [scrollbarH]="true" [selected]="selectedMunicipios" [selectAllRowsOnPage]="false" (select)="aoSelecionarDistrito($event)"
+                            [selectionType]="'checkbox'">
+                            <ngx-datatable-column [width]="30" [headerCheckboxable]="true" [checkboxable]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template> </ng-template>
+                            </ngx-datatable-column>
+            
+                            <ngx-datatable-column name="Designação" [width]="300">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.designacao }}
+                                </ng-template>
+                            </ngx-datatable-column>
+
+                            <ngx-datatable-column name="Municíopio"[flexGrow]="2">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.municipio }}
+                                </ng-template>
+                            </ngx-datatable-column>
+            
+                            <ngx-datatable-column name="Província" [flexGrow]="2">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.provincia }}
+                                </ng-template>
+                            </ngx-datatable-column>
+        
+                            <ngx-datatable-column name="Data da última actualização" [width]="210">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
+                                </ng-template>
+                            </ngx-datatable-column>
+        
+                            <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
+                                </ng-template>
+                            </ngx-datatable-column>
+            
+                            <ngx-datatable-column name="" [width]="50" [frozenRight]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <div class="bg-white w-50">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
+                                            style="transform: translateY(1px)">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <button mat-menu-item
+                                                [routerLink]="['','D',IdClassificacao,row.idRealizacaoInscricao]">
+                                                <span>Consultar </span>
+                                            </button>
+            
+                                            <div *ngIf="row.idEstadoInscricao !== 5">
+                                                <button mat-menu-item
+                                                    [routerLink]="['','E',IdClassificacao,row.idRealizacaoInscricao]">
+                                                    <span>Editar</span>
+                                                </button>
+                                            </div>
+            
+                                            <button mat-menu-item (click)="removerPosto(row)">
+                                                <span>Remover</span>
+                                            </button>
+                                        </mat-menu>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

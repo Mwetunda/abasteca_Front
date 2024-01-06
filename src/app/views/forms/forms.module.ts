@@ -5,6 +5,7 @@ import { NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -27,6 +28,16 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FormsRoutes } from './forms.routing';
 import { WizardComponent } from './wizard/wizard.component';
 import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastecimento.component';
+import { OperadoraListaComponent } from './operadoras/operadora-lista/operadora-lista.component';
+import { OperadoraComponent } from './operadoras/operadora/operadora.component';
+import { CombustiveisListaComponent } from './combustiveis/combustiveis-lista/combustiveis-lista.component';
+import { CombustiveisComponent } from './combustiveis/combustiveis/combustiveis.component';
+import { LocaisListaComponent } from './locais/locais-lista/locais-lista.component';
+import { ProvinciaComponent } from './locais/provincia/provincia.component';
+import { MunicipioComponent } from './locais/municipio/municipio.component';
+import { DistritoComponent } from './locais/distrito/distrito.component';
+import { ContasListaComponent } from './contas/contas-lista/contas-lista.component';
+import { ContaDetalheComponent } from './contas/conta-detalhe/conta-detalhe.component';
 
 @NgModule({
   imports: [
@@ -42,6 +53,7 @@ import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastec
     MatRadioModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatTabsModule,
     MatIconModule,
     MatStepperModule,
     FlexLayoutModule,
@@ -58,7 +70,7 @@ import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastec
     FileUploadComponent, 
     WizardComponent, 
     BasicFormComponent, 
-    PostoAbastecimentoComponent
+    PostoAbastecimentoComponent, OperadoraListaComponent, OperadoraComponent, CombustiveisListaComponent, CombustiveisComponent, LocaisListaComponent, ProvinciaComponent, MunicipioComponent, DistritoComponent, ContasListaComponent, ContaDetalheComponent
   ],
 })
 export class AppFormsModule {}

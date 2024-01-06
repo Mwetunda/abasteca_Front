@@ -18,110 +18,67 @@
         <mat-card-content class="mb-16 mt-0" *ngIf="mostrarFiltros">
             <form [formGroup]="filtroForm" (submit)="filtrar()">
                 <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
-                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                    <div fxFlex="15" fxFlex.xl="15" fxFlex.lg="25" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Designação</mat-label>
-                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                            <input matInput name="Designacao" formControlName="designacao" placeholder="Designação" />
                         </mat-form-field>
                     </div>
     
-                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                    <div fxFlex="11" fxFlex.xl="11" fxFlex.lg="13" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
                         class="pl-1 pr-1">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Operadora</mat-label>
-                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                            <mat-select formControlName="idOperadora" matNativeControl multiple>
                                 <mat-option [value]="0">Seleccione</mat-option>
-                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                    {{estado.estado}}</mat-option>
+                                <mat-option *ngFor="let item of operadoras" [value]="item.idOperadora">
+                                    {{item.designacao}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
     
-                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                    <div fxFlex="17" fxFlex.xl="17" fxFlex.lg="28" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Endereço</mat-label>
-                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                            <input matInput name="Endereco"  formControlName="endereco" placeholder="Endereço" />
                         </mat-form-field>
                     </div>
     
-                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                    <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="14" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
                         class="pl-1 pr-1">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Província</mat-label>
-                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                            <mat-select formControlName="idProvincia" matNativeControl multiple>
                                 <mat-option [value]="0">Seleccione</mat-option>
-                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                    {{estado.estado}}</mat-option>
+                                <mat-option *ngFor="let item of provincias" [value]="item.idProvincia">
+                                    {{item.designacao}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
     
-                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                    <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
                         class="pl-1 pr-1">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Município</mat-label>
-                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                            <mat-select formControlName="idMunicipio" matNativeControl multiple>
                                 <mat-option [value]="0">Seleccione</mat-option>
-                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                    {{estado.estado}}</mat-option>
+                                <mat-option *ngFor="let item of municipios" [value]="item.idMunicipio">
+                                    {{item.designacao}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
     
-                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
+                    <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
                         class="pl-1 pr-1">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Distrito</mat-label>
-                            <mat-select formControlName="idEstado" matNativeControl multiple>
+                            <mat-select formControlName="idDistrito" matNativeControl multiple>
                                 <mat-option [value]="0">Seleccione</mat-option>
-                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                    {{estado.estado}}</mat-option>
+                                <mat-option *ngFor="let item of distritos" [value]="item.idDistrito">
+                                    {{item.designacao}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
-    
-                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Distância(Km)</mat-label>
-                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
-                        </mat-form-field>
-                    </div>
-    
-                    <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
-                        class="pl-1 pr-1">
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Distrito</mat-label>
-                            <mat-select formControlName="idEstado" matNativeControl multiple>
-                                <mat-option [value]="0">Seleccione</mat-option>
-                                <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                    {{estado.estado}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-    
-                    <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Distância(Km)</mat-label>
-                            <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
-                        </mat-form-field>
-                    </div><div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100"
-                    class="pl-1 pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Distrito</mat-label>
-                        <mat-select formControlName="idEstado" matNativeControl multiple>
-                            <mat-option [value]="0">Seleccione</mat-option>
-                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                {{estado.estado}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-    
-                <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Distância(Km)</mat-label>
-                        <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
-                    </mat-form-field>
-                </div>
     
                     <!-- Data com Ranger -->
                     <!-- <div id="data-recognize-contas" formGroupName="form" fxFlex="10" fxFlex.xl="13" fxFlex.lg="17"
@@ -158,7 +115,6 @@
             </form>
         </mat-card-content>
     </mat-card>
-    <!-- / FIM DA SECÇÃO DE FILTROS DE PESQUISA DE CLIENTES -->
     
     <div class="p-0">
         <mat-card class="p-0">
@@ -185,7 +141,7 @@
                 <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
     
                     <button class="btn-filter" mat-raised-button color="primary"
-                        [routerLink]="['/artigos/inscricoes','C',0,0]" style="padding: 0 10px !important">
+                        [routerLink]="['','C',0,0]" style="padding: 0 10px !important">
                         <mat-icon>add_circle</mat-icon>
                         Inserir Posto
                     </button>
@@ -258,34 +214,34 @@
                         </ng-template>
                     </ngx-datatable-column>
     
+                    <ngx-datatable-column name="Data da última actualização" [width]="210">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
                     <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
                         </ng-template>
                     </ngx-datatable-column>
     
-                    <ngx-datatable-column name="Data da última actualização" [width]="210">
+                    <ngx-datatable-column name="" [width]="50" [frozenRight]="true">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
-                        </ng-template>
-                    </ngx-datatable-column>
-    
-                    <ngx-datatable-column name="" [width]="60" [frozenRight]="true">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <div class="bg-white w-100">
+                            <div class="bg-white w-50">
                                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
                                     style="transform: translateY(1px)">
                                     <mat-icon>more_vert</mat-icon>
                                 </button>
                                 <mat-menu #menu="matMenu">
                                     <button mat-menu-item
-                                        [routerLink]="['/artigos/inscricoes','D',IdClassificacao,row.idRealizacaoInscricao]">
+                                        [routerLink]="['','D',IdClassificacao,row.idRealizacaoInscricao]">
                                         <span>Consultar </span>
                                     </button>
     
                                     <div *ngIf="row.idEstadoInscricao !== 5">
                                         <button mat-menu-item
-                                            [routerLink]="['/artigos/inscricoes','E',IdClassificacao,row.idRealizacaoInscricao]">
+                                            [routerLink]="['','E',IdClassificacao,row.idRealizacaoInscricao]">
                                             <span>Editar</span>
                                         </button>
                                     </div>

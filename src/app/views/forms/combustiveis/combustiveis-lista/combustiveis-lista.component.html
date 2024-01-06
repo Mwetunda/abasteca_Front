@@ -1,0 +1,106 @@
+<div *ngIf="progressBar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div>
+    <mat-card class="p-0">
+        <mat-card-title>
+            <div class="flex-x-btw flex-y-center pl-1 ">
+                <p class="pr-1 pr-1 mb-0 txt-primary">
+                    <span>Combustíveis</span>
+                </p>
+            </div>
+        </mat-card-title>
+    </mat-card>
+    
+    <div class="p-0">
+        <mat-card class="p-0">
+            <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
+                <div class="p-0">
+                    <button (click)="exportarParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
+                        matTooltipClass="green-900" class="img-button">
+                        <img src="assets/images/svg-icons/excel-icon.svg" style="
+                          border-radius: 0 !important;
+                          width: 20px !important;
+                          height: 20px !important;
+                        " alt="" />
+                    </button>
+                </div>
+                <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
+    
+                    <button class="btn-filter" mat-raised-button color="primary"
+                        [routerLink]="['','C',0,0]" style="padding: 0 10px !important">
+                        <mat-icon>add_circle</mat-icon>
+                        Inserir Combustível
+                    </button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+    
+            <div id="tabela-postos">
+                <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 280px)" [rows]="combustiveis"
+                    [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45" [rowHeight]="35" [scrollbarV]="true"
+                    [scrollbarH]="true" [selected]="selected" [selectAllRowsOnPage]="false" (select)="aoSelecionar($event)"
+                    [selectionType]="'checkbox'">
+                    <ngx-datatable-column [width]="1" [headerCheckboxable]="true" [checkboxable]="true">
+                        <ng-template let-row="row" ngx-datatable-cell-template> </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Designação" [width]="300">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.designacao }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Preço" [width]="150">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="w-100 text-right">
+                                {{ row?.preco | currency: ' ' }}
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="Data da última actualização" [width]="210">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Data de Registo" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+    
+                    <ngx-datatable-column name="" [width]="50" [frozenRight]="true">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="bg-white w-50">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
+                                    style="transform: translateY(1px)">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item
+                                        [routerLink]="['','D',IdClassificacao,row.idRealizacaoInscricao]">
+                                        <span>Consultar </span>
+                                    </button>
+    
+                                    <div *ngIf="row.idEstadoInscricao !== 5">
+                                        <button mat-menu-item
+                                            [routerLink]="['','E',IdClassificacao,row.idRealizacaoInscricao]">
+                                            <span>Editar</span>
+                                        </button>
+                                    </div>
+    
+                                    <button mat-menu-item (click)="remover(row)">
+                                        <span>Remover</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </mat-card>
+    </div>
+</div>
+

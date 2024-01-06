@@ -5,6 +5,10 @@ import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.com
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { WizardComponent } from './wizard/wizard.component';
 import { PostoAbastecimentoComponent } from './posto-abastecimento/posto-abastecimento.component';
+import { OperadoraListaComponent } from './operadoras/operadora-lista/operadora-lista.component';
+import { CombustiveisListaComponent } from './combustiveis/combustiveis-lista/combustiveis-lista.component';
+import { LocaisListaComponent } from './locais/locais-lista/locais-lista.component';
+import { ContasListaComponent } from './contas/contas-lista/contas-lista.component';
 
 export const FormsRoutes: Routes = [
   {
@@ -31,10 +35,30 @@ export const FormsRoutes: Routes = [
         data: { title: 'Wizard', breadcrumb: 'WIZARD' }
       },
       {
-        path: 'posto',
+        path: 'contas',
+        component: ContasListaComponent,
+        data: { title: 'Contas', breadcrumb: '' }
+      },
+      {
+        path: 'postos',
         component: PostoAbastecimentoComponent,
-        data: { title: '', breadcrumb: '' }
-      }
+        data: { title: 'Postos', breadcrumb: '' }
+      },
+      {
+        path: 'configuracoes/operadoras',
+        component: OperadoraListaComponent,
+        data: { title: 'Operadoras', breadcrumb: '' }
+      },
+      {
+        path: 'configuracoes/combustiveis',
+        component: CombustiveisListaComponent,
+        data: { title: 'Combustiveis', breadcrumb: '' }
+      },
+      {
+        path: 'configuracoes/locais',
+        component: LocaisListaComponent,
+        data: { title: 'Locais', breadcrumb: '' }
+      },
     ]
   }
 ];
