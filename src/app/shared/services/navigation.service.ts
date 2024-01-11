@@ -49,7 +49,7 @@ export class NavigationService {
       icon: 'local_gas_station',
     },
     {
-      name: 'Operadores',
+      name: 'Utilizadores',
       state: 'forms/upload',
       type: 'link',
       icon: 'supervisor_account',
