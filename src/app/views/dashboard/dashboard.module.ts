@@ -8,6 +8,10 @@ import { NgxEchartsModule } from "ngx-echarts";
 import { SharedPipesModule } from "app/shared/pipes/shared-pipes.module";
 import { DashboardRoutes } from "./dashboard.routing";
 import { AnalyticsComponent } from "./analytics/analytics.component";
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { DashCardTeTotalComponent } from './cards/dash-card-te-total/dash-card-te-total.component';
+
 
 @NgModule({
   imports: [
@@ -19,9 +23,11 @@ import { AnalyticsComponent } from "./analytics/analytics.component";
       echarts: () => import('echarts')
     }),
     SharedPipesModule,
+    MatCardModule,
+    MatIconModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [AnalyticsComponent],
+  declarations: [AnalyticsComponent, DashCardTeTotalComponent],
   exports: []
 })
 export class DashboardModule {}

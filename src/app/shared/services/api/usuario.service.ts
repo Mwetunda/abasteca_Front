@@ -14,18 +14,23 @@ const httpOptions = {
 @Injectable({
     providedIn: "root",
 })
-export class PostoAbastecimentoService {
+export class UsuarioService {
     baseUrl: string;
 
     constructor(private http: HttpClient) {
         this.baseUrl = `${environment.apiURL}`;
     }
 
-    getPostosAbastecimento(modelo: any): Observable<any> {
-        return this.http.post(this.baseUrl + "postoAbastecimento/lista/", modelo, httpOptions).pipe();
+    getUsuarios(modelo: any): Observable<any> {
+        return this.http.post(this.baseUrl + "usuario/lista/usuarios/", modelo, httpOptions).pipe();
     }
 
-    getPostoAbastecimento(idPostoAbastecimento: number): Observable<any> {
-        return this.http.get(this.baseUrl + "postoAbastecimento/" + idPostoAbastecimento, httpOptions).pipe();
+    getOperadores(modelo: any): Observable<any> {
+        return this.http.post(this.baseUrl + "usuario/lista/usuarios/", modelo, httpOptions).pipe();
+    }
+
+
+    getUsuario(idUsuario: number): Observable<any> {
+        return this.http.get(this.baseUrl + "usuario/" + idUsuario, httpOptions).pipe();
     }
 }

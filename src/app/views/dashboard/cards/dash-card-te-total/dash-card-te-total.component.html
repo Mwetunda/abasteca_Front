@@ -1,0 +1,52 @@
+<mat-card class="relative"  style="background: white!important;">
+    <div style="position: absolute; right: 9px" *ngIf="!isCardTotal">
+      <button class="card-control" mat-icon-button [matMenuTriggerFor]="menuCard">
+        <mat-icon class="text-primario">more_vert</mat-icon>
+      </button>
+      <mat-menu #menuCard="matMenu">
+        <button (click)="onItemSelect(item)" *ngFor="let item of listaItem" mat-menu-item>
+          <span>{{item[propKey]}}</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class=" full-width  py-6" style="display: flex; flex-direction: column; align-items: center">
+      <div class="flex-xy-center {{iconBgColor}}" style="display: flex; height: 60px; width: 60px;  border-radius: 100px">
+        <mat-icon class="text-white">{{icon}}</mat-icon>
+      </div>
+      <div class="py-6 text-center" *ngIf="!isCardTotal">
+        <div class="text-center" style="font-size: 24px; font-weight: 600; line-height: 24px">
+          {{itemSelecionado?.total}}
+        </div>
+       <div class="flex flex-xy-center mt-1">
+         <div class="text-primario" style="background-color: #e5effc; border-radius: 50px; padding: 5px 10px">
+           <small><strong>
+             {{codeCard === 'cli' ? 'Documentos para': ''}}  
+             {{codeCard === 'estado' ? 'Documentos ': ''}}  
+             {{itemSelecionado[propKey]}}
+           </strong>
+           </small>
+         </div>
+       </div>
+      </div>
+
+      <div class="py-6" *ngIf="isCardTotal">
+       <div fxLayout="row">
+         <div fxFlex="100" class="px-1">
+           <div class="text-center" style="font-size: 18px; font-weight: 600; line-height: 24px">
+             <span *ngIf="isMoney">{{total | currency: ' '}} Kz</span>
+             <span *ngIf="!isMoney">{{total}}</span>
+           </div>
+           <div class="mt-1">
+             <div class="text-primario text-center" style="background-color: #e5effc; border-radius: 50px; padding: 5px 10px">
+               <small>
+                 <strong *ngIf="isMoney">Total arrecadado</strong>
+                 <strong *ngIf="!isMoney">Documentos criados</strong>
+               </small>
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+    </div>
+  </mat-card>

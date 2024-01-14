@@ -1,4 +1,4 @@
-<div class="mat-bg-primary m-12 px-24 py-24 rounded">
+<!-- <div class="mat-bg-primary m-12 px-24 py-24 rounded">
   <h5 class="text-white text-16 mb-16 font-weight-bold">Last 12 Months Sales</h5>
   <div height="180" echarts class="chart m-0" [options]="dailyTrafficChartBar"></div>
 </div>
@@ -26,7 +26,7 @@
 
       <mat-card class="p-0 overflow-x-auto" fxLayout="row wrap">
         <table mat-table fxFlex [dataSource]="productList" *ngIf="productList" class="mat-elevation-z1 min-w-600">
-          <!-- image Column -->
+
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td class="py-12" mat-cell *matCellDef="let element">
@@ -39,13 +39,13 @@
             </td>
           </ng-container>
 
-          <!-- Name Column -->
+
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Revenue</th>
             <td mat-cell *matCellDef="let element">${{ element.price }}</td>
           </ng-container>
 
-          <!-- Weight Column -->
+
           <ng-container matColumnDef="available">
             <th mat-header-cell *matHeaderCellDef>Stock Status</th>
             <td mat-cell *matCellDef="let element">
@@ -55,7 +55,7 @@
             </td>
           </ng-container>
 
-          <!-- Symbol Column -->
+
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef>Action</th>
             <td mat-cell *matCellDef="let element">
@@ -242,4 +242,135 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+
+
+<div id="dashboard">
+  <ng-container>
+    <div fxLayout="row wrap" *ngIf="Menu_Tesouraria">
+      <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="100" class="egret-navy-dark mb-1">
+        <mat-card class="p-1 egret-navy-dark mb-0">
+          <div class="px-1 py-6">
+            <h2 class="mb-0 font-weight-bold">Postos de Abastecimento</h2>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <app-dash-card-te-total icon="description" [codeCard]="''" [isMoney]="false" [iconBgColor]="'bg-grad-red'" [isCardTotal]="true"
+          [total]="total" [propKey]="'nome'">
+        </app-dash-card-te-total>
+      </div>
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <app-dash-card-te-total icon="send" [codeCard]="'estado'" [iconBgColor]="'bg-grad-orange'"
+          [listaItem]="total" [propKey]="'nome'">
+        </app-dash-card-te-total>
+      </div>
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <app-dash-card-te-total icon="person" [codeCard]="'cli'" [iconBgColor]="'bg-grad-blue'"
+          [listaItem]="total" [propKey]="'entidade'">
+        </app-dash-card-te-total>
+      </div>
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <app-dash-card-te-total icon="receipt_long" [codeCard]="'tipo'" [iconBgColor]="'bg-grad-green'"
+          [listaItem]="total" [propKey]="'tipo'">
+        </app-dash-card-te-total>
+      </div>
+    </div>
+
+    <div fxLayout="row wrap" *ngIf="Menu_Tesouraria">
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <app-dash-card-te-total icon="payments" [isMoney]="true" [iconBgColor]="'bg-grad-red'" [isCardTotal]="true"
+          [total]="total" [propKey]="'nome'">
+        </app-dash-card-te-total>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <mat-card>
+          <dash-card-te-caixas-bancos [tesouraria]="tesouraria"></dash-card-te-caixas-bancos>
+        </mat-card>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="50" fxFlex.lg="50" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
+        <dash-card-chart-te [chartType]="'bar'" [tesouraria]="tesouraria"></dash-card-chart-te>
+      </div>
+    </div>
+
+
+    <!-- <div fxLayout="row wrap" *ngIf="Menu_Compras">
+      <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="100" class="egret-navy-dark mb-1">
+        <mat-card class="p-1 egret-navy-dark mb-0">
+          <div class="px-1 py-6">
+            <h2 class="mb-0 font-weight-bold">Usuários</h2>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <dash-card-tipo-doc icon="assignment" [listaItem]="compras.tipos" [propKey]="'tipo'"></dash-card-tipo-doc>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <dash-card-tipo-doc icon="check" [listaItem]="compras.estados" [propKey]="'nome'"></dash-card-tipo-doc>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <dash-card-tipo-doc icon="reorder" [isCardTotal]="true" [listaItem]="compras.estados" [total]="compras.total[0]"
+          [propKey]="'nome'"></dash-card-tipo-doc>
+      </div>
+
+      <div fxFlex="100" fxFlex.xl="25" fxFlex.lg="25" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+        <dash-card-tipo-doc icon="payments" [isMoney]="true" [isCardTotal]="true" [listaItem]="compras.estados"
+          [total]="compras.total[1]" [propKey]="'nome'"></dash-card-tipo-doc>
+      </div>
+
+      <div fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="100" fxFlex.xs="100">
+        <dash-chart-pie-fa [documentos]="compras"></dash-chart-pie-fa>
+      </div>
+      <div fxFlex="100" fxFlex.xl="70" fxFlex.lg="70" fxFlex.md="70" fxFlex.sm="100" fxFlex.xs="100">
+        <dash-card-chart-fa [chartType]="'line'" [documentos]="compras"></dash-card-chart-fa>
+      </div>
+    </div> -->
+
+    <!-- <div fxLayout="row wrap" *ngIf="Menu_Entidade">
+      <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="100" class="egret-navy-dark ">
+        <mat-card class="p-1 egret-navy-dark mb-0">
+          <div class="px-1 py-6">
+            <h2 class="mb-0 font-weight-bold">Entidades</h2>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxLayout="row wrap" *ngFor="let entidade of dadosEntidades.slice(0,1)">
+        <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="100" class="mb-1 py-6">
+          <mat-card class="p-1 mb-1" *ngIf="false" [style.background-color]="temaActivo?.baseColor"
+            style="background:{{temaActivo?.baseColor}}!important">
+            <div class="px-1">
+              <h2 class="mb-0 font-weight-bold">{{entidade.titulo}}</h2>
+            </div>
+          </mat-card>
+        </div>
+        <div fxFlex="33.3" fxFlex.lg="33.33" fxFlex.sm="33.3" fxFlex.xs="100">
+          <dash-card-total [entidade]="entidade"></dash-card-total>
+        </div>
+        <div fxFlex="33.3" fxFlex.lg="33.33" fxFlex.sm="33.3" fxFlex.xs="100">
+          <dash-card-estados [entidade]="entidade"></dash-card-estados>
+        </div>
+        <div fxFlex="33.3" fxFlex.lg="33.33" fxFlex.sm="33.3" fxFlex.xs="100">
+          <dash-card-person [entidade]="entidade"></dash-card-person>
+        </div>
+
+        <div fxFlex="50" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+          <dash-card-periodo [chartType]="'bar'" [entidade]="entidade"></dash-card-periodo>
+        </div>
+
+        <div fxFlex="50" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" fxFlex.xs="100">
+          <dash-card-periodo [chartType]="'line'" [entidade]="entidade"></dash-card-periodo>
+        </div>
+      </div>
+      <div class="py-6 mt-1"></div>
+    </div> -->
+  </ng-container>
 </div>
