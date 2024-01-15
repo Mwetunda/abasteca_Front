@@ -9,6 +9,6 @@ export const environment = {
   production: false,
   //apiURL: config.apiUrl
 
-  apiURL: "https://localhost:44336/api/",
-  //apiURL: "https://abasteca-back.kiamisoft.ao/api/",
+  //apiURL: "https://localhost:44336/api/",
+  apiURL: "https://abasteca-back.kiamisoft.ao/api/",
 };
