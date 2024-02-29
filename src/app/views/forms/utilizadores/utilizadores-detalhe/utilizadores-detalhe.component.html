@@ -1,0 +1,138 @@
+<modal-base tituloModal="{{titulo}}" accao="{{data.accao}}" codBotao="" (aoGravar)="salvarOperador()" [loading]="progressbar"
+    (aoCancelar)="fecharModal()">
+
+    <form [formGroup]="operadorForm" fxFlex="100" class="my-2 k-form-crud">
+        <div class="p-1" style="height: 63vh; overflow-y:auto">
+            <div fxflex="100" class="pb-1">
+                <mat-accordion class="w-100">
+                    <mat-expansion-panel (opened)="true" (closed)="panelOpenState = false" [expanded]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h3 class="text-primary">Dados Gerais</h3>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <div fxLayout="row wrap " class="pt-05 pb-1" [ngClass]="{ disableDiv: !modoEdicao }" style="margin-top: 5px;">
+
+                            <div fxFlex="100" fxFlex.xl="100" fxFlex.lg="100" fxFlex.gt-xs="100" fxFlex.xs="100"
+                                class="p-1">
+                                <div class="text-center pb-1">
+                                    <p class="text-center error-text">{{ imgInvalida }}</p>
+                                    <label for="avatar" class="avatar_label">
+                                        <span>
+                                            <img [src]="imgUrl" alt="" style="width: 100%" />
+                                            <mat-icon>camera_alt</mat-icon>
+                                        </span>
+                                        <input type="file" style="display: none" accept="image/*" name="avatar"
+                                            id="avatar" (change)="previsualizar($event)" />
+                                    </label>
+                                    <p class="text-center error-text">{{ imgInvalida }}</p>
+                                </div>
+                            </div>
+
+                            <div fxFlex="17" fxFlex.xl="17" fxFlex.lg="17" fxFlex.gt-xs="50" fxFlex.xs="50"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Username</mat-label>
+                                    <input type="text" matInput formControlName="userName" placeholder="Username"
+                                        maxlength="15" autocomplete="off" required />
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngIf="data?.accao =='C'" fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Password</mat-label>
+                                    <input required [type]="typeField ? 'text' : 'password'" matInput
+                                        formControlName="passWord" placeholder="Password" autocomplete="false"
+                                        minlength="8" />
+                                    <mat-icon matSuffix (click)="changeTypeField()" class="pointer">{{ typeField ?
+                                        "visibility" :
+                                        "visibility_off" }}</mat-icon>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Perfil</mat-label>
+                                    <mat-select matNativeControl formControlName="idPerfil" required>
+                                        <mat-option [value]="0">Seleccione</mat-option>
+                                        <mat-option *ngFor="let perfil of data?.perfils" [value]="perfil.idPerfil">{{
+                                            perfil.designacao }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="30" fxFlex.xl="30" fxFlex.lg="40" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Nome</mat-label>
+                                    <input required type="text" matInput formControlName="nome" placeholder="Nome"
+                                        required maxlength="80" />
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="20" fxFlex.xl="25" fxFlex.lg="25" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>E-mail</mat-label>
+                                    <input type="email" matInput formControlName="email" autocomplete="off"
+                                        placeholder="E-mail" maxlength="127" />
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="20" fxFlex.xl="10" fxFlex.lg="20" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Telefone</mat-label>
+                                    <input type="text" matInput autocomplete="off" formControlName="telefone"
+                                        placeholder="Telefone" maxlength="16" />
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="20" fxFlex.xl="20" fxFlex.lg="22" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1">
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Província de residência</mat-label>
+                                    <mat-select matNativeControl formControlName="idProvinciaResidencia">
+                                        <mat-option [value]="0">Seleccione</mat-option>
+                                        <mat-option *ngFor="let item of data?.provincias" [value]="item.idProvincia">{{
+                                            item.designacao }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="15" fxFlex.xl="15" fxFlex.lg="20" fxFlex.gt-xs="50" fxFlex.xs="100"
+                                class="pl-1 pr-1" style="padding-top: 10px">
+                                <div class="pr-16">
+                                    <mat-slide-toggle class="font-weight-bold text-primary" formControlName="estado"
+                                        color="primary">
+                                        Estado
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <div *ngIf="data?.codPerfil == 1" fxflex="100" class="pb-1">
+                <mat-accordion class="w-100">
+                    <mat-expansion-panel (opened)="true" (closed)="panelOpenState = false" [expanded]="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h3 class="text-primary">Preferências do operador</h3>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <div fxLayout="row wrap " class="pt-05 pb-1" [ngClass]="{ disableDiv: !modoEdicao }" style="margin-top: 5px;">
+
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </form>
+
+</modal-base>

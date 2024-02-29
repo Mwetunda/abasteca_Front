@@ -19,27 +19,8 @@
             <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
                 <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
                     <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Designação</mat-label>
-                        <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
-                    </mat-form-field>
-                </div>
-
-                <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50"
-                    fxFlex.xs="100" class="pl-1 pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Operadora</mat-label>
-                        <mat-select formControlName="idEstado" matNativeControl multiple>
-                            <mat-option [value]="0">Seleccione</mat-option>
-                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                {{estado.estado}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div fxFlex="15" fxFlex.xl="12.5" fxFlex.lg="12.5" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Endereço</mat-label>
-                        <input matInput name="Codigo" class="uppercase" formControlName="codigo" placeholder="Código" />
+                        <mat-label>Nome</mat-label>
+                        <input matInput name="Nome" formControlName="nome" placeholder="Nome" />
                     </mat-form-field>
                 </div>
 
@@ -49,32 +30,8 @@
                         <mat-label>Província</mat-label>
                         <mat-select formControlName="idEstado" matNativeControl multiple>
                             <mat-option [value]="0">Seleccione</mat-option>
-                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                {{estado.estado}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50"
-                    fxFlex.xs="100" class="pl-1 pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Município</mat-label>
-                        <mat-select formControlName="idEstado" matNativeControl multiple>
-                            <mat-option [value]="0">Seleccione</mat-option>
-                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                {{estado.estado}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div fxFlex="20" fxFlex.xl="12" fxFlex.lg="15" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50"
-                    fxFlex.xs="100" class="pl-1 pr-1">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Distrito</mat-label>
-                        <mat-select formControlName="idEstado" matNativeControl multiple>
-                            <mat-option [value]="0">Seleccione</mat-option>
-                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
-                                {{estado.estado}}</mat-option>
+                            <mat-option *ngFor="let item of provincias" [value]="item.idProvincia">
+                                {{item.designacao}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -109,7 +66,7 @@
                         <mat-icon class="text-muted text-18">more_vert</mat-icon>
                     </button>
                     <mat-menu #userMenu="matMenu">
-                        <button mat-menu-item>Ver Detalhe</button>
+                        <button mat-menu-item (click)="abrirModalOperador(user, 'D')">Ver Detalhe</button>
                         <button mat-menu-item>Enviar e-mail</button>
                         <button mat-menu-item>
                             <span>{{user?.estado ? 'Desactivar' : 'Activar'}}</span>

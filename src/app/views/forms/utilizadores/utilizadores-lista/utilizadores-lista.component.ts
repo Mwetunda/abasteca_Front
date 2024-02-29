@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ProvinciaDto } from 'app/shared/models/locais/provincia';
-import { PerfilDto } from 'app/shared/models/perfil/perfil';
 import { UsuarioDto } from 'app/shared/models/usuario/usuario';
-import { LocaisSevice } from 'app/shared/services/api/locais.service';
 import { UsuarioService } from 'app/shared/services/api/usuario.service';
 import { Subscription } from 'rxjs';
-import { UtilizadoresDetalheComponent } from '../../utilizadores/utilizadores-detalhe/utilizadores-detalhe.component';
+import { UtilizadoresDetalheComponent } from '../utilizadores-detalhe/utilizadores-detalhe.component';
+import { PerfilDto } from 'app/shared/models/perfil/perfil';
+import { ProvinciaDto } from 'app/shared/models/locais/provincia';
+import { LocaisSevice } from 'app/shared/services/api/locais.service';
 
 @Component({
-  selector: 'app-contas-lista',
-  templateUrl: './contas-lista.component.html',
-  styleUrls: ['./contas-lista.component.scss']
+  selector: 'app-utilizadores-lista',
+  templateUrl: './utilizadores-lista.component.html',
+  styleUrls: ['./utilizadores-lista.component.scss']
 })
-export class ContasListaComponent implements OnInit {
-  filtroForm: FormGroup;
+export class UtilizadoresListaComponent implements OnInit {
+
   mostrarFiltros = true;
+  filtroForm: FormGroup;
+  selected = [];
   progressBar: boolean = false;
-  users: UsuarioDto[] = []
+  operadores: UsuarioDto[] = [];
   perfils: PerfilDto[] = [];
   subscricoes: Subscription[] = [];
   provincias: ProvinciaDto[] = [];
@@ -28,34 +30,40 @@ export class ContasListaComponent implements OnInit {
     private usuarioService: UsuarioService,
     private modal: MatDialog,
     private locaisSevice: LocaisSevice,
-    ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.filtroForm = this.initForms();
-    this.getUsuarios();
     this.getPerfils();
+    this.getOperadores();
     this.getProvincias();
   }
 
   initForms(): any {
 
     return this.formBuilder.group({
-      idEstado: [],
-      codigo: [''],
-      nome: [''],
-      NIF: [''],
-      email: [''],
+      designacao: [''],
+      idOperadora: [],
+      endereco: [''],
+      idProvincia: [],
+      idMunicipio: [],
+      idDistrito: [],
     });
   }
 
-  getUsuarios() {
+  getOperadores() {
 
     const filtro: any = {
+      distancia: 200,
+      latitude: -8.822956196237396,
+      longitude: 13.242132926984917
     }
 
     this.progressBar = true;
-    this.usuarioService.getUsuarios(filtro).subscribe((res) => {
-      this.users = res.objecto;
+    this.usuarioService.getOperadores(filtro).subscribe((res) => {
+      this.operadores = res.objecto;
       this.progressBar = false;
     },
       (error) => {
@@ -96,17 +104,26 @@ export class ContasListaComponent implements OnInit {
         perfils: this.perfils,
         provincias: this.provincias,
         accao,
-        codPerfil: 1,
-        titulo: accao === 'C' ? "Adicionar usuário" : accao === 'E' ? "Editar usuário" : "Consultar usuário"
+        codPerfil: 2,
+        titulo: accao === 'C' ? "Adicionar operador" : accao === 'E' ? "Editar operador" : "Consultar operador"
       },
     });
 
     this.subscricoes.push(
       modalRef.afterClosed().subscribe((registo) => {
+        console.log("Reg: ", registo);
         if(registo > 0){
-          this.getUsuarios();
+          this.getOperadores();
         }
       })
     );
+  }
+
+  async aoSelecionar(evento: any) {
+    this.selected = await evento.selected;
+  }
+
+  exportarParaExcel() {
+
   }
 }

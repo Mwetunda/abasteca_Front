@@ -9,6 +9,7 @@ import { OperadoraListaComponent } from './operadoras/operadora-lista/operadora-
 import { CombustiveisListaComponent } from './combustiveis/combustiveis-lista/combustiveis-lista.component';
 import { LocaisListaComponent } from './locais/locais-lista/locais-lista.component';
 import { ContasListaComponent } from './contas/contas-lista/contas-lista.component';
+import { UtilizadoresListaComponent } from './utilizadores/utilizadores-lista/utilizadores-lista.component';
 
 export const FormsRoutes: Routes = [
   {
@@ -34,6 +35,8 @@ export const FormsRoutes: Routes = [
         component: WizardComponent,
         data: { title: 'Wizard', breadcrumb: 'WIZARD' }
       },
+
+
       {
         path: 'contas',
         component: ContasListaComponent,
@@ -44,6 +47,11 @@ export const FormsRoutes: Routes = [
         component: PostoAbastecimentoComponent,
         data: { title: 'Postos', breadcrumb: '' }
       },
+      {
+        path: 'operadores',
+        component: UtilizadoresListaComponent,
+        data: { title: 'Operadores', breadcrumb: '' }
+      }, 
       {
         path: 'configuracoes/operadoras',
         component: OperadoraListaComponent,

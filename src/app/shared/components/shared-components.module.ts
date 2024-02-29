@@ -9,7 +9,7 @@ import { SearchModule } from '../search/search.module';
 import { SharedPipesModule } from '../pipes/shared-pipes.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
-
+import { MatIconModule } from '@angular/material/icon';
 // ONLY REQUIRED FOR **SIDE** NAVIGATION LAYOUT
 import { HeaderSideComponent } from './header-side/header-side.component';
 import { SidebarSideComponent } from './sidebar-side/sidebar-side.component';
@@ -36,6 +36,7 @@ import { BottomSheetShareComponent } from './bottom-sheet-share/bottom-sheet-sha
 import { MatxExampleViewerComponent } from './example-viewer/example-viewer.component';
 import { MatxExampleViewerTemplateComponent } from './example-viewer-template/example-viewer-template.component';
 import { MatxNotifications2Component } from './matx-notifications2/matx-notifications2.component';
+import { ModalBaseComponent } from './modal-base/modal-base';
 
 
 const components = [
@@ -58,12 +59,14 @@ const components = [
   MatxSidebarTogglerDirective,
   BottomSheetShareComponent,
   MatxExampleViewerComponent,
+  ModalBaseComponent,
   MatxExampleViewerTemplateComponent
 ]
 
 @NgModule({
   imports: [
-CommonModule,
+    MatIconModule,
+    CommonModule,
     FormsModule,
     RouterModule,
     TranslateModule,

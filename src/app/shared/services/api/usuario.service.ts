@@ -26,11 +26,18 @@ export class UsuarioService {
     }
 
     getOperadores(modelo: any): Observable<any> {
-        return this.http.post(this.baseUrl + "usuario/lista/usuarios/", modelo, httpOptions).pipe();
+        return this.http.post(this.baseUrl + "usuario/lista/operadores/", modelo, httpOptions).pipe();
     }
-
 
     getUsuario(idUsuario: number): Observable<any> {
         return this.http.get(this.baseUrl + "usuario/" + idUsuario, httpOptions).pipe();
+    }
+
+    getPerfils(): Observable<any> {
+        return this.http.get(this.baseUrl + "usuario/perfis/", httpOptions).pipe();
+    }
+
+    SalvarUsuarios(modelo: any): Observable<any> {
+        return this.http.post(this.baseUrl + "usuario/gravar/", modelo, httpOptions).pipe();
     }
 }

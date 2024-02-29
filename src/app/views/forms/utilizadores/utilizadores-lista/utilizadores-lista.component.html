@@ -1,0 +1,242 @@
+<div *ngIf="progressBar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div>
+    <mat-card class="p-0">
+        <mat-card-title>
+            <div class="flex-x-btw flex-y-center pl-1 ">
+                <p class="pr-1 pr-1 mb-0 txt-primary">
+                    <span (click)="mostrarFiltros = !mostrarFiltros"
+                        style="display: flex; align-items: center; cursor: pointer">
+                        <span>Operadores</span>
+                        <mat-icon [innerText]="mostrarFiltros ? 'expand_more' : 'expand_less'"></mat-icon>
+                    </span>
+                </p>
+            </div>
+        </mat-card-title>
+
+        <mat-card-content class="mb-16 mt-0" *ngIf="mostrarFiltros">
+            <form [formGroup]="filtroForm" (submit)="filtrar()">
+                <div fxLayout="row wrap" class="filtro_container" fxLayout.xs="column">
+                    <div fxFlex="15" fxFlex.xl="15" fxFlex.lg="25" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput name="Designacao" formControlName="designacao" placeholder="Designação" />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="17" fxFlex.xl="17" fxFlex.lg="28" fxFlex.gt-xs="50" fxFlex.xs="30" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Telefone</mat-label>
+                            <input matInput name="Endereco" formControlName="endereco" placeholder="Endereço" />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="14" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50"
+                        fxFlex.xs="100" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Perfil</mat-label>
+                            <mat-select formControlName="idPerfil" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let item of perfils" [value]="item.idPerfil">
+                                    {{item.designacao}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="14" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50"
+                        fxFlex.xs="100" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Provincia</mat-label>
+                            <mat-select formControlName="idProvincia" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let item of provincias" [value]="item.idProvincia">
+                                    {{item.designacao}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="12" fxFlex.xl="12" fxFlex.lg="14" fxFlex.gt-xs="30" fxFlex.md="50" fxFlex.sm="50"
+                        fxFlex.xs="100" class="pl-1 pr-1">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Estado</mat-label>
+                            <mat-select formControlName="idProvincia" matNativeControl multiple>
+                                <mat-option [value]="0">Seleccione</mat-option>
+                                <mat-option *ngFor="let item of provincias" [value]="item.idProvincia">
+                                    {{item.designacao}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.xl="15" fxFlex.lg="15" fxFlex.gt-xs="20" fxFlex.xs="30" class="pl-1 pr-1">
+                        <div class="flex flex-y-center pt-03 h-100">
+
+                            <button mat-raised-button color="primary" type="submit" class="btn-filter">
+                                <mat-icon>search</mat-icon>
+                            </button>
+
+                            <button class="ml-05 btn-filter" mat-raised-button color="primary" type="reset"
+                                (click)="limparFiltro()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="p-0">
+        <mat-card class="p-0">
+            <div class="max-height-45 flex-x-btw flex-y-center" fxLayout="row" fxLayout.xs="column">
+                <div class="p-0">
+                    <button (click)="exportarParaExcel()" mat-icon-button matTooltip="Exportar para o Excel"
+                        matTooltipClass="green-900" class="img-button">
+                        <img src="assets/images/svg-icons/excel-icon.svg" style="
+                          border-radius: 0 !important;
+                          width: 20px !important;
+                          height: 20px !important;
+                        " alt="" />
+                    </button>
+                </div>
+                <div class="pt-0 pr-05 flex flex-y-center flex-x-center">
+
+                    <button class="btn-filter" mat-raised-button color="primary" style="padding: 0 10px !important"
+                        (click)="abrirModalOperador(null, 'C')">
+                        <mat-icon>add_circle</mat-icon>
+                        Adicionar Operador
+                    </button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div id="tabela-postos">
+                <ngx-datatable class="material fullscreen bg-white" style="height: calc(100vh - 365px)"
+                    [rows]="operadores" [columnMode]="'force'" [headerHeight]="35" [footerHeight]="45" [rowHeight]="35"
+                    [scrollbarV]="true" [scrollbarH]="true" [selected]="selected" [selectAllRowsOnPage]="false"
+                    (select)="aoSelecionar($event)" [selectionType]="'checkbox'">
+
+                    <ngx-datatable-column [headerCheckboxable]="true" [checkboxable]="true" [flexGrow]="2" name="Foto">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span class="user-avatar " *ngIf="listarImgem">
+                                <ng-container *ngIf="row?.fotografia">
+                                    <img [src]="row?.foto | safe: 'resourceUrl'" style="width: 100%"
+                                        [alt]="row?.userName" />
+                                </ng-container>
+                                <img *ngIf="!row?.foto" src="assets/images/avatars/005-man-2.svg" style="width: 100%"
+                                    alt="" />
+                            </span>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Nome" [width]="250">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div>
+                                <strong>{{ row?.nome }}</strong>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Username" [width]="90">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <strong> {{ row?.userName }}</strong>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="E-mail" [width]="250">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span> {{ row?.email }}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Telefone" [width]="130">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.telefone }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Perfil" [width]="110">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.perfil }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Provincia" [width]="130">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.provinciaResidencia }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Estado" [width]="100">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div>
+                                <button mat-button class="p-05 btn-filter">
+                                    <strong> {{ row?.estado ? 'Activo' : 'Inactivo' }}</strong>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Último Login" [width]="200">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataUltimoLogin | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Data de Actualização" [width]="200">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataActulizacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Data de Registo" [width]="200">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.dataCriacao | date: 'dd/MM/yyyy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column class="pl0" name="Acções" [width]="100" [frozenRight]="true">
+                        <ng-template class="pl0" let-row="row" ngx-datatable-cell-template>
+                            <div class="bg-white w-50">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opções"
+                                    style="transform: translateY(1px)">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="abrirModalOperador(row, 'D')">
+                                        <span>Consultar </span>
+                                    </button>
+
+                                    <div>
+                                        <button mat-menu-item (click)="abrirModalOperador(row, 'E')">
+                                            <span>Editar</span>
+                                        </button>
+                                    </div>
+
+                                    <button mat-menu-item (click)="removerPosto(row)">
+                                        <span>Remover</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+
+                            <!-- <div class="pl0">
+                                <button class="ml-05 btn-filter" mat-raised-button color="primary" type="button">
+                                    <mat-icon>search</mat-icon>
+                                </button>
+
+                                <button class="ml-05 btn-filter2" mat-raised-button color="primary" type="button">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+    
+                                <button class="ml-05 btn-filter" mat-raised-button color="warn" type="reset">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </div> -->
+
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </mat-card>
+    </div>
+</div>

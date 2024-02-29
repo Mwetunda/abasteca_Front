@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { FileUploadModule } from 'ng2-file-upload';
 import {MatSelectModule} from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
@@ -39,39 +40,56 @@ import { MunicipioComponent } from './locais/municipio/municipio.component';
 import { DistritoComponent } from './locais/distrito/distrito.component';
 import { ContasListaComponent } from './contas/contas-lista/contas-lista.component';
 import { ContaDetalheComponent } from './contas/conta-detalhe/conta-detalhe.component';
+import { UtilizadoresListaComponent } from './utilizadores/utilizadores-lista/utilizadores-lista.component';
+import { UtilizadoresDetalheComponent } from './utilizadores/utilizadores-detalhe/utilizadores-detalhe.component';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatListModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatProgressBarModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatIconModule,
-    MatStepperModule,
-    FlexLayoutModule,
-    QuillModule.forRoot(),
-    FileUploadModule,
-    RouterModule.forChild(FormsRoutes),
-    NgxDatatableModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatSelectModule,
-  ],
-  declarations: [
-    RichTextEditorComponent, 
-    FileUploadComponent, 
-    WizardComponent, 
-    BasicFormComponent, 
-    PostoAbastecimentoComponent, OperadoraListaComponent, OperadoraComponent, CombustiveisListaComponent, CombustiveisComponent, LocaisListaComponent, ProvinciaComponent, MunicipioComponent, DistritoComponent, ContasListaComponent, ContaDetalheComponent
-  ],
+    declarations: [
+        RichTextEditorComponent,
+        FileUploadComponent,
+        WizardComponent,
+        BasicFormComponent,
+        PostoAbastecimentoComponent,
+        OperadoraListaComponent,
+        OperadoraComponent,
+        CombustiveisListaComponent,
+        CombustiveisComponent,
+        LocaisListaComponent,
+        ProvinciaComponent,
+        MunicipioComponent,
+        DistritoComponent,
+        ContasListaComponent,
+        ContaDetalheComponent,
+        UtilizadoresListaComponent,
+        UtilizadoresDetalheComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatListModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatProgressBarModule,
+        MatRadioModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatIconModule,
+        MatStepperModule,
+        FlexLayoutModule,
+        QuillModule.forRoot(),
+        FileUploadModule,
+        RouterModule.forChild(FormsRoutes),
+        NgxDatatableModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatExpansionModule,
+        SharedModule,
+    ]
 })
 export class AppFormsModule {}

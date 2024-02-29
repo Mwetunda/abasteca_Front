@@ -49,8 +49,8 @@ export class NavigationService {
       icon: 'local_gas_station',
     },
     {
-      name: 'Utilizadores',
-      state: 'forms/upload',
+      name: 'Operadores',
+      state: 'forms/operadores',
       type: 'link',
       icon: 'supervisor_account',
     },
