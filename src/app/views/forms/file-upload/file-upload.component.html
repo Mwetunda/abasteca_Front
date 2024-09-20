@@ -6,17 +6,16 @@
   <mat-card-content>
       <div class="mb-16">
         <p>Multiple</p>
-        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+      <!-- <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/> -->
 
         <p>Single</p>
-        <input type="file" ng2FileSelect [uploader]="uploader" />
+       <!-- <input type="file" ng2FileSelect [uploader]="uploader" /> -->
       </div>
 
+      <!--[uploader]="uploader"-->
       <div class="mb-16">
-        <div ng2FileDrop
-        [ngClass]="{'dz-file-over': hasBaseDropZoneOver}"
-        (fileOver)="fileOverBase($event)"
-        [uploader]="uploader"
+        <div ng2FileDrop [ngClass]="{'dz-file-over': hasBaseDropZoneOver}"(fileOver)="fileOverBase($event)"
+        
         class="fileupload-drop-zone mb-24">
         Drop file here
         </div>

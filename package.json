@@ -38,6 +38,7 @@
     "date-fns": "^2.29.3",
     "echarts": "^5.3.3",
     "flag-icons": "^6.6.6",
+    "g": "^2.0.1",
     "highlight.js": "^11.6.0",
     "hopscotch": "^0.3.1",
     "moment": "^2.29.4",
@@ -60,7 +61,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.3",
-    "@angular/cli": "~14.2.3",
+    "@angular/cli": "16.2.14",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^18.7.18",

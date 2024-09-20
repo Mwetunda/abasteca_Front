@@ -10,6 +10,8 @@ import { ITheme, ThemeService } from "app/shared/services/theme.service";
 import tinyColor from "tinycolor2";
 import PerfectScrollbar from "perfect-scrollbar";
 import { Subscription } from "rxjs";
+import { EChartsOption } from "echarts";
+import { Position } from "app/shared/components/perfect-scrollbar";
 
 @Component({
   selector: "app-analytics",
@@ -32,25 +34,26 @@ export class AnalyticsComponent implements OnInit {
   trafficGrowthChart: any;
   bounceRateGrowthChart: any;
 
-  dailyTrafficChartBar: any;
-  trafficSourcesChart: any;
-  countryTrafficStats: any[];
-  doughNutPieOptions: any;
+  graficoPostosProvincia: EChartsOption;
+  graficoBarraInvetidoPostosProvincia: EChartsOption;
+  graficoLinhaPostosProvincia: EChartsOption;
+  doughNutPie1Options: EChartsOption;
+  doughNutPie2Options: EChartsOption;
 
   mostrarDashboard = true;
 
   statCardList = [
     {
       icon: "people",
-      title: "New Leads",
+      title: "Total de Utilizadores",
       amount: "3,050",
       color: "primary"
     },
     {
-      icon: "attach_money",
-      title: "This week Sales",
-      amount: "$80,500",
-      color: "primary"
+      icon: "local_gas_station",
+      title: "Total de Postos",
+      amount: "80,500",
+      color: "secondary"
     },
     {
       icon: "store",
@@ -63,311 +66,351 @@ export class AnalyticsComponent implements OnInit {
       title: "Orders to deliver",
       amount: "305 Orders",
       color: "accent"
-    }
+    },
   ];
 
-  productList = [
-    {
-      imgUrl: "/assets/images/products/headphone-2.jpg",
-      name: "earphone",
-      price: 100,
-      available: 15
-    },
-    {
-      imgUrl: "/assets/images/products/headphone-3.jpg",
-      name: "earphone",
-      price: 1500,
-      available: 30
-    },
-    {
-      imgUrl: "/assets/images/products/iphone-2.jpg",
-      name: "iPhone x",
-      price: 1900,
-      available: 35
-    },
-    {
-      imgUrl: "/assets/images/products/iphone-1.jpg",
-      name: "iPhone x",
-      price: 100,
-      available: 0
-    },
-    {
-      imgUrl: "/assets/images/products/headphone-3.jpg",
-      name: "Head phone",
-      price: 1190,
-      available: 5
-    }
-  ];
+  constructor(private themeService: ThemeService) { }
 
-  onGoingProjectList = [
-    {
-      icon: "start_border",
-      color: "warn",
-      title: "project 1"
-    },
-    {
-      icon: "date_range",
-      color: "primary",
-      title: "project 2"
-    },
-    {
-      icon: "start_border",
-      color: "warn",
-      title: "project 3"
-    },
-    {
-      icon: "date_range",
-      color: "accent",
-      title: "project 4"
-    }
-  ];
+  ngAfterViewInit() { }
 
-  displayedColumns: string[] = ["name", "price", "available", "action"];
-
-  constructor(private themeService: ThemeService) {}
-
-  ngAfterViewInit() {}
   ngOnInit() {
     this.themeService.onThemeChange.subscribe(activeTheme => {
-      this.initDoughNutPieOptions(activeTheme);
-      this.initDailyTrafficChartBar(activeTheme);
+
     });
-    this.initDailyTrafficChartBar(this.themeService.activatedTheme);
-    this.initDoughNutPieOptions(this.themeService.activatedTheme);
+
+    this.construirGraficoPostosProvincia();
+    this.construirGraficoBarraInvertidoPostosProvincia();
+    this.construirGraficoLinhaPostosProvincia();
+    this.construir1DoughNutPieOptions();
+    this.construir2DoughNutPieOptions();
   }
 
-  initDoughNutPieOptions(theme) {
-    this.doughNutPieOptions = {
-      backgroundColor: "transparent",
-      color: [
-        "#f44336",
-        "#ff9e43",
-        "rgba(116, 103, 239, 1)"
-      ],
-      legend: {
-        show: true,
-        itemGap: 20,
-        icon: "circle",
-        bottom: 0,
-        textStyle: {
-          fontSize: 13,
-          fontFamily: "roboto"
-        }
+  construirGraficoPostosProvincia() {
+    this.graficoPostosProvincia = {
+      title: {
+        text: 'Postos de Abastecimento por Província',
+        subtext: 'Postos de Abastecimento por Província Distribuidos por Operadoras'
       },
       tooltip: {
-        show: true,
-        trigger: "item",
-        formatter: "{a} <br/>{b}: {c} ({d}%)"
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        }
+      },
+      legend: {},
+      grid: {
+        top: '15%',
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
       },
       xAxis: [
         {
-          axisLine: {
-            show: false
-          },
-          splitLine: {
-            show: false
+          type: 'category',
+          data: ['Bengo', { value: "Benguela", textStyle: {} }, 'Bié', 'Cabinda', 'Cuando Cubango', 'Cuanza Norte', 'Cuanza Sul',
+            'Cunene', 'Huambo', 'Huíla', 'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malange', 'Moxico',
+            'Namibe', 'Uíge', 'Záire'],
+          axisLabel: {
+            rotate: 40,
+            interval: 0
           }
         }
       ],
       yAxis: [
         {
-          axisLine: {
-            show: false
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: 'Sonangol',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
           },
-          splitLine: {
-            show: false
+          data: [320, 332, 301, 334, 390, 330, 320, 83, 652, 862, 674, 173, 561, 243, 68, 145, 25, 6]
+        },
+        {
+          name: 'Total',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [120, 232, 401, 34, 90, 130, 20, 813, 152, 262, 174, 73, 261, 43, 8, 5, 3, 6]
+        },
+        {
+          name: 'Sonangalp',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [3, 32, 21, 134, 98, 31, 6, 82, 62, 12, 24, 17, 51, 40, 8, 9, 35, 16]
+        },
+        {
+          name: 'Pumangol',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [10, 65, 90, 23, 245, 345, 34, 89, 32, 54, 7, 12, 34, 3, 89, 6, 12, 4]
+        },
+        {
+          name: 'Bandeira Branca',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [9, 65, 555, 345, 65, 23, 895, 4, 56, 314, 234, 355, 12, 456, 234, 46, 225, 12]
+        },
+        {
+          name: 'TOMSA',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [2, 5, 9, 2, 4, 23, 90, 23, 34, 45, 2, 3, 24, 76, 54, 3, 34, 10]
+        },
+      ]
+    }
+  }
+
+  construirGraficoBarraInvertidoPostosProvincia() {
+    this.graficoBarraInvetidoPostosProvincia = {
+      title: {
+        text: 'Postos de Abastecimento por Província',
+        subtext: 'Postos de Abastecimento por Província Distribuidos por Operadoras'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        }
+      },
+      legend: {},
+      grid: {
+        top: '15%',
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'value',
+          boundaryGap: [0, 0.01]
+        }
+      ],
+      yAxis: [
+        {
+          type: 'category',
+          data: ['Bengo', 'Benguela', 'Bié', 'Cabinda', 'Cuando Cubango', 'Cuanza Norte', 'Cuanza Sul',
+            'Cunene', 'Huambo', 'Huíla', 'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malange', 'Moxico',
+            'Namibe', 'Uíge', 'Záire'],
+          axisLabel: {
+            //rotate: 40,
+            interval: 0
+          },
+
+        }
+      ],
+      series: [
+        {
+          name: 'Postos',
+          type: 'bar',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [320, 332, 301, 334, 390, 330, 320, 83, 652, 862, 674, 173, 561, 243, 68, 145, 25, 6]
+        },
+
+      ]
+    }
+  }
+
+  construirGraficoLinhaPostosProvincia() {
+    this.graficoLinhaPostosProvincia = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        }
+      },
+      legend: {},
+      grid: {
+        top: '10%',
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['Bengo', 'Benguela', 'Bié', 'Cabinda', 'Cuando Cubango', 'Cuanza Norte', 'Cuanza Sul',
+            'Cunene', 'Huambo', 'Huíla', 'Luanda', 'Lunda Norte', 'Lunda Sul', 'Malange', 'Moxico',
+            'Namibe', 'Uíge', 'Záire'],
+          axisLabel: {
+            rotate: 40,
+            interval: 0
           }
         }
       ],
-
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
       series: [
         {
-          name: "Traffic Rate",
-          type: "pie",
-          radius: ["45%", "72.55%"],
-          center: ["50%", "50%"],
+          name: 'Sonangol',
+          type: 'line',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [320, 332, 301, 334, 390, 330, 320, 83, 652, 862, 674, 173, 561, 243, 68, 145, 25, 6]
+        },
+        {
+          name: 'Total',
+          type: 'line',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [120, 232, 401, 34, 90, 130, 20, 813, 152, 262, 174, 73, 261, 43, 8, 5, 3, 6]
+        },
+        {
+          name: 'Sonangalp',
+          type: 'line',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [3, 32, 21, 134, 98, 31, 6, 82, 62, 12, 24, 17, 51, 40, 8, 9, 35, 16]
+        },
+        {
+          name: 'Pumangol',
+          type: 'line',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [10, 65, 90, 23, 245, 345, 34, 89, 32, 54, 7, 12, 34, 3, 89, 6, 12, 4]
+        },
+        {
+          name: 'Bandeira Branca',
+          type: 'line',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [9, 65, 555, 345, 65, 23, 895, 4, 56, 314, 234, 355, 12, 456, 234, 46, 225, 12]
+        },
+        {
+          name: 'TOMSA',
+          type: 'line',
+          emphasis: {
+            focus: 'series'
+          },
+          data: [2, 5, 9, 2, 4, 23, 90, 23, 34, 45, 2, 3, 24, 76, 54, 3, 34, 10]
+        },
+      ]
+    }
+  }
+
+  construir1DoughNutPieOptions() {
+    this.doughNutPie1Options = {
+
+      title: {
+        text: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional',
+        //subtext: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        top: '10%',
+        left: 'center'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
           avoidLabelOverlap: false,
-          hoverOffset: 0,
-          emphasis: {disabled: true},
-          stillShowZeroSum: false,
 
           label: {
-            normal: {
-              show: false,
-              position: "center",
-              textStyle: {
-                fontSize: "13",
-                fontWeight: "normal"
-              },
-              formatter: "{a}"
-            },
-            emphasis: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
               show: true,
-              textStyle: {
-                fontSize: "15",
-                fontWeight: "normal",
-                color: "rgba(116, 103, 239, 1)"
-              },
-              formatter: "{b} \n{c} ({d}%)"
+              fontSize: 40,
+              fontWeight: 'bold'
             }
           },
           labelLine: {
-            normal: {
-              show: false
-            }
+            show: false
           },
           data: [
-            {
-              value: 65,
-              name: "Google"
-            },
-            {
-              value: 20,
-              name: "Facebook"
-            },
-            { value: 15, name: "Others" }
-          ],
-
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)"
-            }
-          }
+            { value: 1048, name: 'Sonangol' },
+            { value: 635, name: 'Total' },
+            { value: 580, name: 'Sonangalp' },
+            { value: 884, name: 'Pumangol' },
+            { value: 300, name: 'Bandeira Branca' },
+            { value: 30, name: 'TOMSA' }
+          ]
         }
       ]
-    };
+    }
   }
 
-  initDailyTrafficChartBar(theme) {
-    this.dailyTrafficChartBar = {
-      grid: {
-        top: 16,
-        left: 36,
-        right: 16,
-        bottom: 32
-      },
-      legend: {},
-      tooltip: {
-        show: true,
-        trigger: "axis",
+  construir2DoughNutPieOptions() {
+    this.doughNutPie2Options = {
 
-        axisPointer: {
-          type: "cross",
-          lineStyle: {
-            opacity: 0
-          }
-        },
-        crossStyle: {
-          color: "#000"
-        }
+      title: {
+        text: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional',
+        //subtext: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        top: '10%',
+        left: 'center'
       },
       series: [
         {
-          data: [34, 45, 31, 45, 31, 43, 26, 43, 31, 45, 33, 40],
-          type: "line",
-          areaStyle: {},
-          smooth: true,
-          lineStyle: {
-            width: 2,
-            color: "#fff"
-          }
-        }
-      ],
-      xAxis: {
-        show: true,
-        type: "category",
-        showGrid: false,
-        boundaryGap: false,
-        data: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
-        ],
-        axisLabel: {
-          color: "#ccc",
-          margin: 20
-        },
-        axisLine: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        }
-      },
-      yAxis: {
-        type: "value",
-        min: 10,
-        max: 60,
-        axisLabel: {
-          color: "#ccc",
-          margin: 20,
-          fontSize: 13,
-          fontFamily: "roboto"
-        },
-        splitLine: {
-          show: true,
-          lineStyle: {
-            color: "rgba(255, 255, 255, .1)"
-          }
-        },
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          padAngle: 5,
+          itemStyle: {
+            borderRadius: 10
+          },
 
-        axisLine: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        }
-      },
-      color: [
-        {
-          type: "linear",
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: "rgba(255,255,255,0.3)" // color at 0% position
-            },
-            {
-              offset: 1,
-              color: "rgba(255,255,255,0)" // color at 100% position
+          label: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 40,
+              fontWeight: 'bold'
             }
-          ],
-          global: false // false by default
+          },
+          labelLine: {
+            show: false
+          },
+          data: [
+            { value: 1048, name: 'Sonangol' },
+            { value: 635, name: 'Total' },
+            { value: 580, name: 'Sonangalp' },
+            { value: 884, name: 'Pumangol' },
+            { value: 300, name: 'Bandeira Branca' },
+            { value: 100, name: 'TOMSA' }
+          ]
         }
       ]
-    };
-  }
-
-  getProductStatus(value) {
-    if (value) {
-      if (value < 20) {
-        return {
-          color: "accent",
-          status: `${value} available`
-        };
-      } else
-        return {
-          color: "primary",
-          status: `in stock`
-        };
-    } else
-      return {
-        color: "warn",
-        status: `out of stcok`
-      };
+    }
   }
 }
