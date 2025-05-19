@@ -1,5 +1,5 @@
-<modal-base tituloModal="{{titulo}}" accao="{{data.accao}}" codBotao="" (aoGravar)="salvarOperador()" [loading]="progressbar"
-    (aoCancelar)="fecharModal()">
+<modal-base tituloModal="{{titulo}}" accao="{{data.accao}}" codBotao="" (aoGravar)="salvarOperador()"
+    [loading]="progressbar" (aoCancelar)="fecharModal()">
 
     <form [formGroup]="operadorForm" fxFlex="100" class="my-2 k-form-crud">
         <div class="p-1" style="height: 63vh; overflow-y:auto">
@@ -12,7 +12,8 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-divider></mat-divider>
-                        <div fxLayout="row wrap " class="pt-05 pb-1" [ngClass]="{ disableDiv: !modoEdicao }" style="margin-top: 5px;">
+                        <div fxLayout="row wrap " class="pt-05 pb-1" [ngClass]="{ disableDiv: !modoEdicao }"
+                            style="margin-top: 5px;">
 
                             <div fxFlex="100" fxFlex.xl="100" fxFlex.lg="100" fxFlex.gt-xs="100" fxFlex.xs="100"
                                 class="p-1">
@@ -39,8 +40,8 @@
                                 </mat-form-field>
                             </div>
 
-                            <div *ngIf="data?.accao =='C'" fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.gt-xs="50" fxFlex.xs="100"
-                                class="pl-1 pr-1">
+                            <div *ngIf="data?.accao =='C'" fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.gt-xs="50"
+                                fxFlex.xs="100" class="pl-1 pr-1">
                                 <mat-form-field class="full-width" appearance="outline">
                                     <mat-label>Password</mat-label>
                                     <input required [type]="typeField ? 'text' : 'password'" matInput
@@ -48,7 +49,8 @@
                                         minlength="8" />
                                     <mat-icon matSuffix (click)="changeTypeField()" class="pointer">{{ typeField ?
                                         "visibility" :
-                                        "visibility_off" }}</mat-icon>
+                                        "visibility_off" }}
+                                    </mat-icon>
                                 </mat-form-field>
                             </div>
 
@@ -126,7 +128,8 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-divider></mat-divider>
-                        <div fxLayout="row wrap " class="pt-05 pb-1" [ngClass]="{ disableDiv: !modoEdicao }" style="margin-top: 5px;">
+                        <div fxLayout="row wrap " class="pt-05 pb-1" [ngClass]="{ disableDiv: !modoEdicao }"
+                            style="margin-top: 5px;">
 
                         </div>
                     </mat-expansion-panel>

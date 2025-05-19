@@ -382,7 +382,7 @@ export class AnalyticsComponent implements OnInit {
           type: 'pie',
           radius: ['40%', '70%'],
           avoidLabelOverlap: false,
-          padAngle: 5,
+          //padAngle: 5,
           itemStyle: {
             borderRadius: 10
           },
