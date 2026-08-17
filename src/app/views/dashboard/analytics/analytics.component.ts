@@ -45,13 +45,13 @@ export class AnalyticsComponent implements OnInit {
   statCardList = [
     {
       icon: "people",
-      title: "Total de Utilizadores",
+      title: "Utilizadores",
       amount: "3,050",
       color: "primary"
     },
     {
       icon: "local_gas_station",
-      title: "Total de Postos",
+      title: "Postos de Abastecimento",
       amount: "80,500",
       color: "secondary"
     },
@@ -59,13 +59,19 @@ export class AnalyticsComponent implements OnInit {
       icon: "store",
       title: "Inventory Status",
       amount: "8.5% Stock Surplus",
-      color: "accent"
+      color: "primary"
     },
     {
       icon: "shopping_cart",
       title: "Orders to deliver",
       amount: "305 Orders",
-      color: "accent"
+      color: "secondary"
+    },
+    {
+      icon: "store",
+      title: "Inventory Status",
+      amount: "8.5% Stock Surplus",
+      color: "primary"
     },
   ];
 
@@ -87,10 +93,10 @@ export class AnalyticsComponent implements OnInit {
 
   construirGraficoPostosProvincia() {
     this.graficoPostosProvincia = {
-      title: {
-        text: 'Postos de Abastecimento por Província',
-        subtext: 'Postos de Abastecimento por Província Distribuidos por Operadoras'
-      },
+      // title: {
+      //   text: 'Postos de Abastecimento por Província',
+      //   subtext: 'Postos de Abastecimento por Província Distribuidos por Operadoras'
+      // },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -177,10 +183,10 @@ export class AnalyticsComponent implements OnInit {
 
   construirGraficoBarraInvertidoPostosProvincia() {
     this.graficoBarraInvetidoPostosProvincia = {
-      title: {
-        text: 'Postos de Abastecimento por Província',
-        subtext: 'Postos de Abastecimento por Província Distribuidos por Operadoras'
-      },
+      // title: {
+      //   text: 'Postos de Abastecimento por Província',
+      //   subtext: 'Postos de Abastecimento por Província Distribuidos por Operadoras'
+      // },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -317,10 +323,10 @@ export class AnalyticsComponent implements OnInit {
   construir1DoughNutPieOptions() {
     this.doughNutPie1Options = {
 
-      title: {
-        text: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional',
-        //subtext: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional'
-      },
+      // title: {
+      //   text: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional',
+      //   subtext: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional'
+      // },
       tooltip: {
         trigger: 'item'
       },
@@ -365,10 +371,10 @@ export class AnalyticsComponent implements OnInit {
   construir2DoughNutPieOptions() {
     this.doughNutPie2Options = {
 
-      title: {
-        text: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional',
-        //subtext: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional'
-      },
+      // title: {
+      //   text: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional',
+      //   subtext: 'Total de Postos de Abastecimento por  Operadora a Nível Nacional'
+      // },
       tooltip: {
         trigger: 'item'
       },

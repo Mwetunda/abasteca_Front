@@ -1,10 +1,8 @@
 <div fxLayout="row wrap">
-  <div *ngFor="let item of statCardList" fxFlex="100" fxFlex.sm="50" fxFlex.gt-sm="25">
+  <div *ngFor="let item of statCardList" fxFlex="100" fxFlex.sm="50" fxFlex.gt-sm="20">
     <mat-card class="p-24" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="center center">
-        <mat-icon class="text-48 text-{{item.color}}">{{
-          item.icon
-          }}</mat-icon>
+        <mat-icon class="text-48 text-{{item.color}}">{{ item.icon}}</mat-icon>
         <div class="ml-12">
           <p class="m-0  mb-4">{{ item.title }}</p>
           <h5 class="m-0 text-{{item.color}}">{{ item.amount }}</h5>
@@ -17,17 +15,15 @@
   </div>
 </div>
 
-<mat-card style="background-color: #243e69">
+<mat-card style="background-color: rgb(235, 238, 241)">
   <mat-card-title>
-    <div class="flex-x-btw flex-y-center pl-1 ">
-      <p class="pr-1 pr-1 mb-0 txt-primary">
-        <span (click)="mostrarMetricasPosto = !mostrarMetricasPosto"
-          style="display: flex; align-items: center; cursor: pointer; color: white; font-size: 20px;">
-          <span>Estatística dos Postos de Abastecimento</span>
-          <mat-icon [innerText]="mostrarMetricasPosto ? 'expand_more' : 'expand_less'"></mat-icon>
-        </span>
-      </p>
-    </div>
+    <p class="pr-1 pr-1 mb-0 txt-primary">
+      <span (click)="mostrarMetricasPosto = !mostrarMetricasPosto"
+        style="display: flex; align-items: center; cursor: pointer; color: black; font-size: 20px;">
+        <span>Estatística dos Postos de Abastecimento</span>
+        <mat-icon [innerText]="mostrarMetricasPosto ? 'expand_more' : 'expand_less'"></mat-icon>
+      </span>
+    </p>
   </mat-card-title>
 
   <mat-card-content class="mb-16 mt-0" *ngIf="mostrarMetricasPosto">
@@ -61,17 +57,15 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card style="background-color: #243e69">
+<mat-card style="background-color: rgb(235, 238, 241)">
   <mat-card-title>
-    <div class="flex-x-btw flex-y-center pl-1 ">
-      <p class="pr-1 pr-1 mb-0 txt-primary">
-        <span (click)="mostrarMetricasUsuarios = !mostrarMetricasUsuarios"
-          style="display: flex; align-items: center; cursor: pointer; color: white; font-size: 20px;">
-          <span>Estatística de Utilizadores da Plataforma</span>
-          <mat-icon [innerText]="mostrarMetricasUsuarios ? 'expand_more' : 'expand_less'"></mat-icon>
-        </span>
-      </p>
-    </div>
+    <p class="pr-1 pr-1 mb-0 txt-primary">
+      <span (click)="mostrarMetricasUsuarios = !mostrarMetricasUsuarios"
+        style="display: flex; align-items: center; cursor: pointer; color: black; font-size: 20px;">
+        <span>Estatística de Utilizadores da Plataforma</span>
+        <mat-icon [innerText]="mostrarMetricasUsuarios ? 'expand_more' : 'expand_less'"></mat-icon>
+      </span>
+    </p>
   </mat-card-title>
 
   <mat-card-content class="mb-16 mt-0" *ngIf="mostrarMetricasUsuarios">
